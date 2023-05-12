@@ -37,8 +37,14 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60]
         }
       },
-      firstName: DataTypes.STRING(25),
-      lastName: DataTypes.STRING(30)
+      firstName: {
+        type: DataTypes.STRING(25),
+        allowNull: false
+      },
+      lastName: {
+        type: DataTypes.STRING(30),
+        allowNull: false
+      }
     }, {
       sequelize,
       modelName: 'User',

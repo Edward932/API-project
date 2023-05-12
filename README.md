@@ -11,7 +11,7 @@
 
 ![db-schema]
 
-[db-schema]: ./images/meetup_dbdiagram.png
+[db-schema]: ./images/Meet-up-clone-db.png
 <!--!!END -->
 <!--!!ADD -->
 <!-- `<insert database schema design here>` -->
