@@ -12,7 +12,7 @@ module.exports = {
       organizerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'User',
+          model: 'Users',
           key: 'id'
         }
       },
