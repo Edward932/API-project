@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
 
     static associate(models) {
-      // define association here
+      Event.hasMany(models.EventImage, { foreignKey: 'eventId' });
     }
   }
   Event.init({
