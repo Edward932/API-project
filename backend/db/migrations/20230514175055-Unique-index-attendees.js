@@ -8,17 +8,17 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.addIndex(
-      'Members',
-      ['groupId', 'userId'],
+      'Attendees',
+      ['eventId', 'userId'],
       {
         unique: true,
-        name: 'idx_unique_Members_groupId_userId',
+        name: 'idx_unique_Attendees_eventId_userId',
         ...options
       },
-    );
+    )
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.removeIndex('Members', 'idx_unique_Members_groupId_userId', options);
+    await queryInterface.removeIndex('Attendees', 'idx_unique_Attendees_eventId_userId', options)
   }
 };
