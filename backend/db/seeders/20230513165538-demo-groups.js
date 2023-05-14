@@ -1,7 +1,11 @@
 'use strict';
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 const { Group, User } = require('../models');
-console.log("HERE", Group, User);
 
 const seed = [
   {
@@ -40,7 +44,6 @@ const seed = [
   }
 ];
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
 
@@ -69,6 +72,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Groups');
+    options.tableName = 'Groups'
+    await queryInterface.bulkDelete(options);
   }
 };
