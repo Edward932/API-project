@@ -13,8 +13,8 @@ module.exports = {
       {
         unique: true,
         name: 'idx_unique_Attendees_eventId_userId',
-        ...options
       },
+      options
     )
   },
 

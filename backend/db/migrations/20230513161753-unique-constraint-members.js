@@ -13,8 +13,8 @@ module.exports = {
       {
         unique: true,
         name: 'idx_unique_Members_groupId_userId',
-        ...options
       },
+      options
     );
   },
 
