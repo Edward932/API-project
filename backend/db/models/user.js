@@ -3,8 +3,21 @@ const { Model, Validator } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+
     static associate(models) {
-      // define association here
+      User.belongsToMany(models.Group, {
+        through: 'Member',
+        foreignKey: 'userId',
+        otherKey: 'groupId'
+      });
+
+      User.belongsToMany(models.Event, {
+        through: 'Attendee',
+        foreignKey: 'userId',
+        otherKey: 'eventId'
+      });
+
+      User.hasMany(models.Group, { foreignKey: 'organizerId' });
     }
   };
 
@@ -37,8 +50,14 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60]
         }
       },
-      firstName: DataTypes.STRING(25),
-      lastName: DataTypes.STRING(30)
+      firstName: {
+        type: DataTypes.STRING(25),
+        allowNull: false
+      },
+      lastName: {
+        type: DataTypes.STRING(30),
+        allowNull: false
+      }
     }, {
       sequelize,
       modelName: 'User',

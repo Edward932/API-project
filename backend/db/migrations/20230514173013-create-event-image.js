@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -6,35 +6,30 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Users", {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('EventImages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING(30),
+      eventId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true
+        references: {
+          model: 'Groups',
+          key: 'id'
+        }
       },
-      email: {
-        type: Sequelize.STRING(256),
+      url: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      preview: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
-        unique: true
-      },
-      hashedPassword: {
-        type: Sequelize.STRING.BINARY,
-        allowNull: false
-      },
-      firstName: {
-        type: Sequelize.STRING(25),
-        allowNull: false
-      },
-      lastName: {
-        type: Sequelize.STRING(30),
-        allowNull: false
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,
@@ -48,8 +43,8 @@ module.exports = {
       }
     }, options);
   },
-  down: async (queryInterface, Sequelize) => {
-    options.tableName = "Users";
-    return queryInterface.dropTable(options);
+  async down(queryInterface, Sequelize) {
+    options.tableName = 'EventImages'
+    await queryInterface.dropTable(options);
   }
 };
