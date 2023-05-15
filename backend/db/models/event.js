@@ -1,13 +1,12 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
 
     static associate(models) {
       Event.belongsToMany(models.User, {
-        through: 'Attendee',
+        through: models.Attendee,
         foreignKey: 'eventId',
         otherKey: 'userId'
       });
