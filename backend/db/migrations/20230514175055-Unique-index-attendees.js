@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.addIndex(
-      'Attendees',
+      options.schema ? `${options.schema}.Attendees` : 'Attendees',
       ['eventId', 'userId'],
       {
         unique: true,
