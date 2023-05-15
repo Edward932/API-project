@@ -73,11 +73,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isNumeric: {
-          msg: 'Price is invalid'
+          msg: 'Price is invalid numeric'
         },
         min: {
-          args: 0,
-          msg: 'Price is invalid'
+          args: [0],
+          msg: 'Price is invalid min'
         }
       }
     },
@@ -85,10 +85,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
       validate: {
-        isAfter: new Date()
+        isAfter: new Date().toDateString()
       }
     },
-    endDate: DataTypes.DATE
+    endDate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Event',

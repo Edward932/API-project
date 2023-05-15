@@ -28,7 +28,7 @@ const seed = [
     ]
   },
   {
-    group: 'Fake event num 2',
+    group: "Fake group num 2",
     venues: [
       {
         "address": "123 app academy Lane",

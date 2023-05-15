@@ -20,7 +20,7 @@ const seed = [
         state: "NY",
       },
       {
-        name: "Fake event",
+        name: "Fake group",
         about: "Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.",
         type: "Online",
         private: false,
@@ -33,7 +33,7 @@ const seed = [
     user: null,
     groups: [
       {
-        name: "Fake event num 2",
+        name: "Fake group num 2",
         about: "Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.",
         type: "Online",
         private: false,

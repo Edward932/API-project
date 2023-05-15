@@ -16,7 +16,7 @@ const seed = [
     ]
   },
   {
-    group:  "Fake event num 2",
+    group:  "Fake group num 2",
     users: [
       'FakeUser2',
       'FakeUser1'
