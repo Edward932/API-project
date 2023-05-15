@@ -5,8 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
-const { Group } = require('../models');
-
+const { Group, Venue } = require('../models');
 
 const seed = [
   {
@@ -52,10 +51,9 @@ module.exports = {
         }
       });
 
-      console.log(group);
       const venuesArr = seed[i].venues;
       for(let j = 0; j < venuesArr.length; j++) {
-        await group.createVenue(venuesArr[j]);
+        await Venue.create({ ...venuesArr[j], groupId: group.id });
       }
     }
   },

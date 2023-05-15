@@ -5,11 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
-console.log('FIRST');
-
 const { User, Group } = require('../models');
-
-console.log('SECOND')
 
 const seed = [
   {
@@ -53,7 +49,6 @@ module.exports = {
 
     for(let i = 0; i < seed.length; i++) {
       const currObj = seed[i];
-      console.log('here', currObj);
 
       if(!currObj.user) {
         for(let j = 0; j < currObj.groups.length; j++) {
