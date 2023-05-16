@@ -198,8 +198,6 @@ router.get('/:groupId/venues', requireAuth, isOrganizerOrCohost, async(req, res,
 
 // create new venue by group id --> auth organizer or co-host
 router.post('/:groupId/venues', requireAuth, isOrganizerOrCohost, async(req, res, next) => {
-    const group = await Group.findByPk(req.params.groupId);
-
     const { address, city, state, lat, lng } = req.body;
 
     let venue;
@@ -273,6 +271,38 @@ router.get('/:groupId/events', async(req, res, next) => {
     }
 
     res.json({ Events: events });
+});
+
+//crate an event for a group --- auth orginazer or co-host
+router.post('/:groupId/events', requireAuth, isOrganizerOrCohost, async(req, res, next) => {
+    const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
+
+    let event;
+    try {
+        const venue = await Venue.findByPk(venueId);
+
+        event = await Event.create({
+            groupId: parseInt(req.params.groupId),
+            venueId: venue?.id ?? 'does not exist',
+            name,
+            type,
+            capacity,
+            price,
+            description,
+            startDate,
+            endDate
+        });
+    } catch(e) {
+        e.message = "Validation Error";
+        e.status = 400;
+        return next(e);
+    }
+
+    const payload = event.toJSON();
+    delete payload.createdAt;
+    delete payload.updatedAt;
+
+    res.json(payload);
 });
 
 module.exports = router;

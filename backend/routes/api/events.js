@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { requireAuth } = require('../../utils/auth');
-const { Event, Attendee, EventImage, Group, Venue } = require('../../db/models');
+const { Event, Attendee, EventImage, Group, Venue, Member } = require('../../db/models');
 
 const router = express.Router();
 
@@ -89,5 +89,110 @@ router.get('/:eventId', async(req, res) => {
     res.json(payload);
 });
 
+// edit an event by id  auth req --- organizer or co-host
+router.put('/:eventId', requireAuth, async(req, res, next) => {
+    let event = await Event.findOne({
+        where: { id: req.params.eventId },
+        attributes: [
+            'id',
+            'groupId',
+            'venueId',
+            'name',
+            'capacity',
+            'price',
+            'description',
+            'startDate',
+            'endDate'
+        ]
+    });
+
+    if(!event) {
+        res.status(404);
+        return res.json({
+            message: "Event couldn't be found"
+        });
+    };
+
+    const group = await Group.findByPk(event.groupId);
+
+    const membership = await Member.findOne({
+        where: {
+            userId: req.user.id,
+            groupId: group.id
+        }
+    });
+
+    if(req.user.id !== group.organizerId && membership?.status !== 'co-host') {
+        const err = new Error('Forbidden');
+        err.status = 403;
+        return next(err);
+    };
+
+    const { venueId, name, type, capacity, price, description, startDate, endDate }= req.body;
+
+    if(venueId) {
+        const venue = await Venue.findByPk(venueId);
+        if(!venue) {
+            res.status(404);
+            return res.json({
+                message: "Venue couldn't be found"
+            });
+        }
+        event.dataValues.venueId = venueId
+    }
+    if(name) event.name = name;
+    if(type) event.type = type;
+    if(capacity) event.capacity = capacity;
+    if(price) event.price = price;
+    if(description) event.description = description;
+    if(startDate) event.startDate = startDate;
+    if(endDate) event.endDate = endDate;
+
+    try {
+        await event.save()
+    } catch(e) {
+        e.message = "Validation Error";
+        e.status = 400;
+        return next(e);
+    }
+
+    const payload = event.toJSON();
+    delete payload.updatedAt;
+
+    res.json(payload);
+});
+
+// delet and event specified by id   auth require => orginizer or co-host
+router.delete('/:eventId', requireAuth, async(req, res, next) => {
+    let event = await Event.findOne({ where: { id: req.params.eventId }});
+
+    if(!event) {
+        res.status(404);
+        return res.json({
+            message: "Event couldn't be found"
+        });
+    };
+
+    const group = await Group.findByPk(event.groupId);
+
+    const membership = await Member.findOne({
+        where: {
+            userId: req.user.id,
+            groupId: group.id
+        }
+    });
+
+    if(req.user.id !== group.organizerId && membership?.status !== 'co-host') {
+        const err = new Error('Forbidden');
+        err.status = 403;
+        return next(err);
+    };
+
+    await event.destroy();
+
+    res.json({
+        message: "Successfully deleted"
+    });
+});
 
 module.exports = router;

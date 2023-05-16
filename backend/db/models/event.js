@@ -1,6 +1,8 @@
 'use strict';
 const { Model } = require('sequelize');
 
+const { Venue } = require('./index');
+
 module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
 
@@ -28,6 +30,16 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'Venues',
         key: 'id'
+      },
+      validate: {
+        notNull: {
+          msg: 'VenueId is required'
+        },
+        checkCustomInput(value) {
+          if(value === 'does not exist') {
+            throw new Error('Venue does not exist')
+          }
+        }
       }
     },
     name: {
@@ -35,8 +47,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: {
-          args: [[5, 100]],
+          args: [5, 100],
           msg: 'Name must be at least 5 characters'
+        },
+        notNull: {
+          msg: 'Name is required'
         }
       }
     },
@@ -51,11 +66,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     type: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         isOnlineOrInPerson(value) {
           if(value !== 'Online' && value !== 'In person') {
             throw new Error('Type must be Online or In person')
           }
+        },
+        notNull: {
+          msg: 'Type is required'
         }
       }
     },
@@ -65,6 +84,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isInt: {
           msg: 'Capacity must be an integer'
+        },
+        notNull: {
+          msg: 'Capacity is required'
         }
       }
     },
@@ -73,11 +95,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isNumeric: {
-          msg: 'Price is invalid numeric'
+          msg: 'Price is invalid'
         },
         min: {
           args: [0],
-          msg: 'Price is invalid min'
+          msg: 'Price is invalid'
+        },
+        notNull: {
+          msg: 'Price is required'
         }
       }
     },
@@ -85,25 +110,34 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
       validate: {
-        isAfter: new Date().toDateString()
+        isAfter: {
+          args: [new Date().toDateString()],
+          msg: 'Start date must be in the future'
+        },
+        notNull: {
+          msg: 'Start date is required'
+        }
       }
     },
     endDate: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'End date is required'
+        },
+        endDateIsAfterStart() {
+          if(new Date(this.startDate) > new Date(this.endDate)) {
+            throw new Error('End date is less than start date')
+          }
+        }
+      }
     }
   }, {
     sequelize,
     modelName: 'Event',
     defaultScope: {
       attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'startDate', 'endDate']
-    },
-    validate: {
-      endDateAfterStart() {
-        if(new Date(this.startDate) > new Date(this.endDate)) {
-          throw new Error('End date is less than start date')
-        }
-      }
     }
   });
   return Event;
