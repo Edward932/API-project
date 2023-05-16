@@ -73,6 +73,7 @@ router.get('/current', requireAuth, async(req, res) => {
     res.json({ Groups: groups });
 });
 
+// get group by id - no auth required
 router.get('/:groupId', async(req, res, next) => {
     const group = await Group.findByPk(req.params.groupId, {
         include: [
@@ -130,7 +131,7 @@ router.post('/', requireAuth, async(req, res, next) => {
     res.json(group);
 });
 
-// add an imgage to a group. require auth = logged in a and member
+// add an imgage to a group. require auth = logged in a and organizer
 router.post('/:groupId/images', requireAuth, async(req, res, next) => {
     //check if user is organizer of group
     const group = await Group.findByPk(req.params.groupId);
@@ -158,7 +159,7 @@ router.post('/:groupId/images', requireAuth, async(req, res, next) => {
     });
 });
 
-//edit a group  require auth = true and orgainzerId
+//edit a group  require auth = true and orgainzer
 router.put('/:groupId', requireAuth, async(req, res, next) => {
     // check if user is orginzer of group
     const group = await Group.findByPk(req.params.groupId);
