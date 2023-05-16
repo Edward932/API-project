@@ -1,7 +1,6 @@
 const express = require('express');
 
 const { requireAuth } = require('../../utils/auth');
-const { Op } = require('sequelize');
 const { Group, Member, GroupImage, User, Venue } = require('../../db/models');
 
 const router = express.Router();
@@ -218,6 +217,88 @@ router.delete('/:groupId', requireAuth, async(req, res, next) => {
     res.json({
         message: 'Successfully deleted'
     });
+});
+
+
+// get all venue for a group   -- auth => oraganizer or co-host
+router.get('/:groupId/venues', requireAuth, async(req, res, next) => {
+    const group = await Group.findByPk(req.params.groupId);
+
+    if(!group) {
+        res.status(404);
+        return res.json({
+         message: "Group couldn't be found"
+        });
+    };
+
+    const membership = await Member.findOne({
+        where: {
+            userId: req.user.id,
+            groupId: group.id
+        }
+    });
+
+    if(req.user.id !== group.organizerId && membership?.status !== 'co-host') {
+        const err = new Error('Forbidden');
+        err.status = 403;
+        return next(err);
+    };
+
+    const venues = await Venue.findAll({
+        where: {
+            groupId: req.params.groupId
+        }
+    });
+
+    res.json({ Venues: venues });
+});
+
+// create new venue by group id --> auth organizer or co-host
+router.post('/:groupId/venues', requireAuth, async(req, res, next) => {
+    const group = await Group.findByPk(req.params.groupId);
+
+    if(!group) {
+        res.status(404);
+        return res.json({
+         message: "Group couldn't be found"
+        });
+    };
+
+    const membership = await Member.findOne({
+        where: {
+            userId: req.user.id,
+            groupId: group.id
+        }
+    });
+
+    if(req.user.id !== group.organizerId && membership?.status !== 'co-host') {
+        const err = new Error('Forbidden');
+        err.status = 403;
+        return next(err);
+    };
+
+    const { address, city, state, lat, lng } = req.body;
+
+    let venue;
+    try{
+        venue = await Venue.create({
+            address,
+            city,
+            state,
+            lat,
+            lng,
+            groupId: req.params.groupId
+        });
+    } catch(e) {
+        e.message = "Validation Error";
+        e.status = 400;
+        return next(e);
+    }
+
+    venue = venue.toJSON();
+    delete venue.createdAt;
+    delete venue.updatedAt;
+    res.json(venue);
 });
 
 module.exports = router;
