@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { requireAuth } = require('../../utils/auth');
+const { requireAuth, restoreUser } = require('../../utils/auth');
 const { isOrganizer, isOrganizerOrCohost } = require('../../utils/checkMembership');
 const { Group, Member, GroupImage, User, Venue, Event, Attendee, EventImage } = require('../../db/models');
 
@@ -185,7 +185,6 @@ router.delete('/:groupId', requireAuth, isOrganizer, async(req, res, next) => {
 
 // get all venue for a group   -- auth => oraganizer or co-host
 router.get('/:groupId/venues', requireAuth, isOrganizerOrCohost, async(req, res, next) => {
-    const group = await Group.findByPk(req.params.groupId);
 
     const venues = await Venue.findAll({
         where: {
@@ -231,8 +230,8 @@ router.get('/:groupId/events', async(req, res, next) => {
         res.status = 404;
         return res.json({
             message: "Group couldn't be found"
-        })
-    }
+        });
+    };
 
     const events = await Event.findAll({
         where: {
@@ -305,6 +304,28 @@ router.post('/:groupId/events', requireAuth, isOrganizerOrCohost, async(req, res
     res.json(payload);
 });
 
+
+// get all members of a group by group id
+// no auth required, but only show pendig members to organizer or co-host
+router.get('/:groupId/members', restoreUser, async(req, res) => {
+    const group = await Group.findByPk(req.params.groupId);
+
+    if(!group) {
+        res.status = 404;
+        return res.json({
+            message: "Group couldn't be found"
+        });
+    };
+
+    const users = await User.findAll({
+        include: {
+            model: Group,
+            attributes: ['id']
+        }
+    });
+
+    res.json(users);
+});
 
 
 module.exports = router;
