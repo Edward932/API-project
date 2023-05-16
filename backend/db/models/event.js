@@ -1,8 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
 
-const { Venue } = require('./index');
-
 module.exports = (sequelize, DataTypes) => {
   class Event extends Model {
 
@@ -26,15 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     venueId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: 'Venues',
         key: 'id'
       },
       validate: {
-        notNull: {
-          msg: 'VenueId is required'
-        },
         checkCustomInput(value) {
           if(value === 'does not exist') {
             throw new Error('Venue does not exist')
