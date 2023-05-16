@@ -2,7 +2,7 @@ const express = require('express');
 
 const { requireAuth } = require('../../utils/auth');
 const { isOrganizer, isOrganizerOrCohost } = require('../../utils/checkMembership');
-const { Group, Member, GroupImage, User, Venue } = require('../../db/models');
+const { Group, Member, GroupImage, User, Venue, Event, Attendee, EventImage } = require('../../db/models');
 
 const router = express.Router();
 
@@ -222,6 +222,57 @@ router.post('/:groupId/venues', requireAuth, isOrganizerOrCohost, async(req, res
     delete venue.createdAt;
     delete venue.updatedAt;
     res.json(venue);
+});
+
+// get all events of a group by group id  - no auth
+// almost same code as get events in events.js so make a helper
+router.get('/:groupId/events', async(req, res, next) => {
+    const group = await Group.findByPk(req.params.groupId);
+
+    if(!group) {
+        res.status = 404;
+        return res.json({
+            message: "Group couldn't be found"
+        })
+    }
+
+    const events = await Event.findAll({
+        where: {
+            groupId: req.params.groupId
+        }
+    });
+
+    for(let i = 0; i < events.length; i++) {
+        const currEvent = events[i].toJSON();
+        console.log(currEvent)
+
+        currEvent.numAttending = await Attendee.count({
+            where: {
+                eventId: currEvent.id
+            }
+        });
+
+        const previewImage = await EventImage.findOne({
+            where: {
+                eventId: currEvent.id,
+                preview: true
+            }
+        });
+
+        currEvent.previewImage = previewImage?.url ?? 'No preview image for event'
+
+        currEvent.Group = await Group.findByPk(currEvent.groupId, {
+            attributes: ['id', 'name', 'city', 'state']
+        });
+
+        currEvent.venue = await Venue.findByPk(currEvent.venueId, {
+            attributes: ['id', 'city', 'state']
+        });
+
+        events[i] = currEvent;
+    }
+
+    res.json({ Events: events });
 });
 
 module.exports = router;

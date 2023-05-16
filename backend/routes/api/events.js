@@ -37,13 +37,57 @@ router.get('/', async(req, res) => {
         });
 
         events[i] = currEvent;
-
-
     }
 
     res.json({ Events: events });
 });
 
+// get details of event by id  -- no auth
+router.get('/:eventId', async(req, res) => {
+    const event = await Event.findOne({
+         where: { id: req.params.eventId },
+         attributes: [
+            'id',
+            'groupId',
+            'venueId',
+            'name',
+            'description',
+            'type',
+            'capacity',
+            'price',
+            'startDate',
+            'endDate'
+         ]
+    });
+
+    if(!event) {
+        res.status(404);
+        return res.json({
+            message: "Event couldn't be found"
+        });
+    }
+
+    const payload = event.toJSON();
+    payload.numAttending = await Attendee.count({
+        where: {
+            eventId: event.id
+        }
+    });
+    payload.Group = await Group.findByPk(payload.groupId, {
+        attributes: ['id', 'name', 'private', 'city', 'state']
+    });
+    payload.Venue = await Venue.findByPk(payload.venueId, {
+        attributes: ['id', 'address', 'city', 'state', 'lat', 'lng']
+    });
+    payload.EventImages = await EventImage.findAll({
+        where: {
+            eventId: payload.id
+        },
+        attributes: ['id', 'url', 'preview']
+    });
+
+    res.json(payload);
+});
 
 
 module.exports = router;
