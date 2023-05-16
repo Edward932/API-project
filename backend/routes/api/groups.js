@@ -1,6 +1,7 @@
 const express = require('express');
 
 const { requireAuth } = require('../../utils/auth');
+const { isOrganizer, isOrganizerOrCohost } = require('../../utils/checkMembership');
 const { Group, Member, GroupImage, User, Venue } = require('../../db/models');
 
 const router = express.Router();
@@ -110,6 +111,7 @@ router.get('/:groupId', async(req, res, next) => {
 // create a group --- require auth = true
 router.post('/', requireAuth, async(req, res, next) => {
     const { name, about, type, private, city, state } = req.body;
+
     let group;
     try {
         group = await Group.create({
@@ -131,22 +133,9 @@ router.post('/', requireAuth, async(req, res, next) => {
 });
 
 // add an imgage to a group. require auth = logged in a and organizer
-router.post('/:groupId/images', requireAuth, async(req, res, next) => {
+router.post('/:groupId/images', requireAuth, isOrganizer, async(req, res, next) => {
     //check if user is organizer of group
     const group = await Group.findByPk(req.params.groupId);
-
-    if(!group) {
-        res.status(404);
-        return res.json({
-         message: "Group couldn't be found"
-        });
-    };
-
-    if(req.user.id !== group.organizerId) {
-        const err = new Error('Forbidden');
-        err.status = 403;
-        return next(err);
-    };
 
     const { url, preview } = req.body;
     const img = await group.createGroupImage({ url, preview });
@@ -159,22 +148,9 @@ router.post('/:groupId/images', requireAuth, async(req, res, next) => {
 });
 
 //edit a group  require auth = true and orgainzer
-router.put('/:groupId', requireAuth, async(req, res, next) => {
+router.put('/:groupId', requireAuth, isOrganizer, async(req, res, next) => {
     // check if user is orginzer of group
     const group = await Group.findByPk(req.params.groupId);
-
-    if(!group) {
-        res.status(404);
-        return res.json({
-         message: "Group couldn't be found"
-        });
-    };
-
-    if(req.user.id !== group.organizerId) {
-        const err = new Error('Forbidden');
-        err.status = 403;
-        return next(err);
-    };
 
     const { name, about, type, private, city, state } = req.body;
     if(name) group.name = name;
@@ -196,21 +172,8 @@ router.put('/:groupId', requireAuth, async(req, res, next) => {
 });
 
 // delete group  require auth true and user must be organizer
-router.delete('/:groupId', requireAuth, async(req, res, next) => {
+router.delete('/:groupId', requireAuth, isOrganizer, async(req, res, next) => {
     const group = await Group.findByPk(req.params.groupId);
-
-    if(!group) {
-        res.status(404);
-        return res.json({
-         message: "Group couldn't be found"
-        });
-    };
-
-    if(req.user.id !== group.organizerId) {
-        const err = new Error('Forbidden');
-        err.status = 403;
-        return next(err);
-    };
 
     await group.destroy();
 
@@ -221,28 +184,8 @@ router.delete('/:groupId', requireAuth, async(req, res, next) => {
 
 
 // get all venue for a group   -- auth => oraganizer or co-host
-router.get('/:groupId/venues', requireAuth, async(req, res, next) => {
+router.get('/:groupId/venues', requireAuth, isOrganizerOrCohost, async(req, res, next) => {
     const group = await Group.findByPk(req.params.groupId);
-
-    if(!group) {
-        res.status(404);
-        return res.json({
-         message: "Group couldn't be found"
-        });
-    };
-
-    const membership = await Member.findOne({
-        where: {
-            userId: req.user.id,
-            groupId: group.id
-        }
-    });
-
-    if(req.user.id !== group.organizerId && membership?.status !== 'co-host') {
-        const err = new Error('Forbidden');
-        err.status = 403;
-        return next(err);
-    };
 
     const venues = await Venue.findAll({
         where: {
@@ -254,28 +197,8 @@ router.get('/:groupId/venues', requireAuth, async(req, res, next) => {
 });
 
 // create new venue by group id --> auth organizer or co-host
-router.post('/:groupId/venues', requireAuth, async(req, res, next) => {
+router.post('/:groupId/venues', requireAuth, isOrganizerOrCohost, async(req, res, next) => {
     const group = await Group.findByPk(req.params.groupId);
-
-    if(!group) {
-        res.status(404);
-        return res.json({
-         message: "Group couldn't be found"
-        });
-    };
-
-    const membership = await Member.findOne({
-        where: {
-            userId: req.user.id,
-            groupId: group.id
-        }
-    });
-
-    if(req.user.id !== group.organizerId && membership?.status !== 'co-host') {
-        const err = new Error('Forbidden');
-        err.status = 403;
-        return next(err);
-    };
 
     const { address, city, state, lat, lng } = req.body;
 
