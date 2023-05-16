@@ -53,23 +53,54 @@ module.exports = (sequelize, DataTypes) => {
     },
     lat: {
       type: DataTypes.DECIMAL(10,7),
+      allowNull: false,
       validate: {
-        isNumeric: true,
-        min: -90,
-        max: 90
+        notNull: {
+          msg: 'Latitude is not valid'
+        },
+        isNumeric: {
+          args: [true],
+          msg: 'Latitude is not valid'
+        },
+        min: {
+          args: [-90],
+          msg: 'Latitude is not valid'
+        },
+        max: {
+          args: [90],
+          msg: 'Latitude is not valid'
+        }
       }
     },
     lng: {
       type: DataTypes.DECIMAL(10,7),
+      allowNull: false,
       validate: {
-        isNumeric: true,
-        min: -180,
-        max: 180
+        notNull: {
+          msg: 'Longitude is not valid'
+        },
+        isNumeric: {
+          args: [true],
+          msg: 'Longitude is not valid'
+        },
+        min: {
+          args: [-180],
+          msg: 'Longitude is not valid'
+        },
+        max: {
+          args: [180],
+          msg: 'Longitude is not valid'
+        }
       }
     }
   }, {
     sequelize,
     modelName: 'Venue',
+    defaultScope: {
+      attributes: {
+        exclude: ['createdAt', 'updatedAt']
+      }
+    }
   });
   return Venue;
 };
