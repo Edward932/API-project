@@ -193,6 +193,30 @@ router.put('/:groupId', requireAuth, async(req, res, next) => {
     }
 
     res.json(group);
-})
+});
+
+// delete group  require auth true and user must be organizer
+router.delete('/:groupId', requireAuth, async(req, res, next) => {
+    const group = await Group.findByPk(req.params.groupId);
+
+    if(!group) {
+        res.status(404);
+        return res.json({
+         message: "Group couldn't be found"
+        });
+    };
+
+    if(req.user.id !== group.organizerId) {
+        const err = new Error('Forbidden');
+        err.status = 403;
+        return next(err);
+    };
+
+    await group.destroy();
+
+    res.json({
+        message: 'Successfully deleted'
+    });
+});
 
 module.exports = router;
