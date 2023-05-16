@@ -26,7 +26,7 @@ router.get('/', async(req, res, next) => {
             }
         });
 
-        groups[i].previewImage = previewImage?.url ?? 'No preview image for group for'
+        groups[i].previewImage = previewImage?.url ?? 'No preview image for group'
     }
 
     res.json({ Groups: groups });

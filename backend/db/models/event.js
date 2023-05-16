@@ -95,6 +95,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Event',
+    defaultScope: {
+      attributes: ['id', 'groupId', 'venueId', 'name', 'type', 'startDate', 'endDate']
+    },
     validate: {
       endDateAfterStart() {
         if(new Date(this.startDate) > new Date(this.endDate)) {
