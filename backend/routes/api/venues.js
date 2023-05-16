@@ -54,8 +54,9 @@ router.put('/:venueId', requireAuth, async(req, res, next) => {
         return next(e);
     };
 
-    delete venue.updatedAt;
-    res.json(venue);
+    const payload = venue.toJSON();
+    delete payload.updatedAt;
+    res.json(payload);
 });
 
 module.exports = router;
