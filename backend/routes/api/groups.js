@@ -305,4 +305,6 @@ router.post('/:groupId/events', requireAuth, isOrganizerOrCohost, async(req, res
     res.json(payload);
 });
 
+
+
 module.exports = router;
