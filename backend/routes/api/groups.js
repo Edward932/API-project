@@ -2,7 +2,7 @@ const express = require('express');
 
 const { requireAuth } = require('../../utils/auth');
 const { isOrganizer, isOrganizerOrCohost } = require('../../utils/checkMembership');
-const { Group, Member, GroupImage, User, Venue } = require('../../db/models');
+const { Group, Member, GroupImage, User, Venue, Event, Attendee, EventImage } = require('../../db/models');
 
 const router = express.Router();
 
@@ -26,7 +26,7 @@ router.get('/', async(req, res, next) => {
             }
         });
 
-        groups[i].previewImage = previewImage?.url ?? 'No preview image for group for'
+        groups[i].previewImage = previewImage?.url ?? 'No preview image for group'
     }
 
     res.json({ Groups: groups });
@@ -198,8 +198,6 @@ router.get('/:groupId/venues', requireAuth, isOrganizerOrCohost, async(req, res,
 
 // create new venue by group id --> auth organizer or co-host
 router.post('/:groupId/venues', requireAuth, isOrganizerOrCohost, async(req, res, next) => {
-    const group = await Group.findByPk(req.params.groupId);
-
     const { address, city, state, lat, lng } = req.body;
 
     let venue;
@@ -222,6 +220,89 @@ router.post('/:groupId/venues', requireAuth, isOrganizerOrCohost, async(req, res
     delete venue.createdAt;
     delete venue.updatedAt;
     res.json(venue);
+});
+
+// get all events of a group by group id  - no auth
+// almost same code as get events in events.js so make a helper
+router.get('/:groupId/events', async(req, res, next) => {
+    const group = await Group.findByPk(req.params.groupId);
+
+    if(!group) {
+        res.status = 404;
+        return res.json({
+            message: "Group couldn't be found"
+        })
+    }
+
+    const events = await Event.findAll({
+        where: {
+            groupId: req.params.groupId
+        }
+    });
+
+    for(let i = 0; i < events.length; i++) {
+        const currEvent = events[i].toJSON();
+        console.log(currEvent)
+
+        currEvent.numAttending = await Attendee.count({
+            where: {
+                eventId: currEvent.id
+            }
+        });
+
+        const previewImage = await EventImage.findOne({
+            where: {
+                eventId: currEvent.id,
+                preview: true
+            }
+        });
+
+        currEvent.previewImage = previewImage?.url ?? 'No preview image for event'
+
+        currEvent.Group = await Group.findByPk(currEvent.groupId, {
+            attributes: ['id', 'name', 'city', 'state']
+        });
+
+        currEvent.venue = await Venue.findByPk(currEvent.venueId, {
+            attributes: ['id', 'city', 'state']
+        });
+
+        events[i] = currEvent;
+    }
+
+    res.json({ Events: events });
+});
+
+//crate an event for a group --- auth orginazer or co-host
+router.post('/:groupId/events', requireAuth, isOrganizerOrCohost, async(req, res, next) => {
+    const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
+
+    let event;
+    try {
+        const venue = await Venue.findByPk(venueId);
+
+        event = await Event.create({
+            groupId: parseInt(req.params.groupId),
+            venueId: venue?.id ?? 'does not exist',
+            name,
+            type,
+            capacity,
+            price,
+            description,
+            startDate,
+            endDate
+        });
+    } catch(e) {
+        e.message = "Validation Error";
+        e.status = 400;
+        return next(e);
+    }
+
+    const payload = event.toJSON();
+    delete payload.createdAt;
+    delete payload.updatedAt;
+
+    res.json(payload);
 });
 
 module.exports = router;
