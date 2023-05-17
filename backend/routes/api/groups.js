@@ -34,19 +34,20 @@ router.get('/', async(req, res, next) => {
 
 // get groups joined or organized by current user -- auth required
 router.get('/current', requireAuth, async(req, res) => {
-    console.log(req.user.id);
 
-    // problem is this where clause will only work when both member an organize not either or.
     const groups = await Group.findAll({
         where: {
-            organizerId: req.user.id
+            [Op.or]: {
+                organizerId: req.user.id,
+
+            }
         },
         include: {
             model: User,
             attributes: ['id'],
-            where: {
-                id: req.user.id
-            }
+            // where: {
+            //     id: req.user.id
+            // }
         }
     });
 
