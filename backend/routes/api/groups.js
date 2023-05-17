@@ -317,14 +317,48 @@ router.get('/:groupId/members', restoreUser, async(req, res) => {
         });
     };
 
-    const users = await User.findAll({
-        include: {
-            model: Group,
-            attributes: ['id']
-        }
-    });
 
-    res.json(users);
+    let isOrgOrCohost = false;
+    if(req.user) {
+        const userId = req.user.toJSON().id
+        if(userId == group.organizerId) {
+            isOrgOrCohost = true;
+        }
+        const currUser = await Member.findOne({
+            where: {
+                groupId: group.id,
+               userId: userId
+            }
+        })
+        if(currUser?.status === 'co-host') {
+            isOrgOrCohost = true;
+        }
+    }
+
+    const users = await User.findAll();
+
+    for(let i = 0; i < users.length; i++) {
+        const member = await Member.findOne({
+            where: {
+                groupId: group.id,
+                userId: users[i].id
+            }
+        });
+
+        const status =  member?.toJSON().status
+        if(status) {
+            users[i] = users[i].toJSON();
+            users[i].Membership = { status }
+        } else {
+            users[i] = undefined
+        }
+    }
+
+    let payload = users.filter(user => user);
+    if(!isOrgOrCohost) {
+        payload = payload.filter(user => user.Membership.status !== 'pending')
+    }
+    res.json(payload);
 });
 
 
