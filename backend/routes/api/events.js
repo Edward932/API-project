@@ -275,7 +275,7 @@ router.post('/:eventId/attendance', requireAuth, async(req, res, next) => {
 
     if(attendence) {
         res.status(400);
-        const message = attendence.status === 'pendings' ?
+        const message = attendence.status === 'pending' ?
             "Attendance has already been requested" :
             "User is already an attendee of the event";
         return res.json({ message });
