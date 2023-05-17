@@ -442,8 +442,6 @@ router.put('/:groupId/membership', requireAuth, isOrganizerOrCohost, async(req, 
     };
 
     if(status === 'co-host') {
-        console.log(req.user.id);
-        console.log(group.organizerId);
         if(req.user.id !== group.organizerId) {
             res.status(403);
             return res.json({
