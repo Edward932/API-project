@@ -32,8 +32,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     status: {
       type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: 'pending'
+      validate: {
+        customValidate(newVal) {
+          const currVal = this.status;
+          if(currVal && newVal === 'pending') {
+            throw new Error('Cannot change a membership status to pending');
+          }
+          if(newVal) {
+            this.status = newVal
+          } else {
+            this.status = 'pending'
+          }
+        }
+      }
     }
   }, {
     sequelize,
