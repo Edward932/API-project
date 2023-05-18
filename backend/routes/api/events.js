@@ -43,6 +43,36 @@ router.get('/', async(req, res) => {
     res.json({ Events: events });
 });
 
+//add an image to an event
+router.post('/:eventId/images', requireAuth, async(req, res, next) => {
+    const event = await Event.findByPk(req.params.eventId);
+
+    if(!event) {
+        res.status(404);
+        return res.json({
+            message: "Event couldn't be found"
+        });
+    };
+
+    const attende = await Attendee.findOne({
+        where: {
+            eventId: event.id,
+            userId: req.user.id
+        }
+    });
+
+    if(attende && attende.status !== 'pending') {
+        const { url, preview } = req.body;
+        const img = await event.createEventImage({ url, preview });
+
+        res.json(img);
+    } else {
+        const err = new Error('Forbiden');
+        err.status = 403;
+        return next(err);
+    }
+});
+
 // get details of event by id  -- no auth
 router.get('/:eventId', async(req, res) => {
     const event = await Event.findOne({

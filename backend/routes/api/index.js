@@ -8,6 +8,8 @@ router.use('/users', require('./users.js'));
 router.use('/groups', require('./groups.js'));
 router.use('/venues', require('./venues.js'));
 router.use('/events', require('./events.js'));
+router.use('/group-images', require('./group-images.js'));
+router.use('/event-images', require('./event-images.js'));
 
 router.post('/test', (req, res) => {
     res.json({ requestBody: req.body });
