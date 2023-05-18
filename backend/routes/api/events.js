@@ -12,12 +12,11 @@ router.get('/', async(req, res, next) => {
     const { name, type, startDate } = req.query;
     if(name) where.name = { [Op.like]: `%${name}%` };
     if(type) where.type = type;
+    if(startDate) where.startDate = {
+        [Op.gt]: new Date(startDate)
+    };
 
-    // const day = new Date(startDate);
-    // const endDay = day.setDate(day.getDate() + 1);
-    // const newDate = new Date(endDay)
-
-    // if(startDate) where.startDate = { [Op.between]: [new Date(startDate), new Date(newDate)] };
+    console.log(where.startDate);
 
     const pagination = {};
     let { page, size } = req.query;
@@ -40,7 +39,7 @@ router.get('/', async(req, res, next) => {
         err.errors.size = "Size must be greater than or equal to 1";
         hasError = true;
     }
-    if(name && isNaN(parseInt(name))) {
+    if(name && !isNaN(parseInt(name))) {
         err.errors.name = "Name must be a string";
         hasError = true;
     }
