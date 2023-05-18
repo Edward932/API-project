@@ -117,9 +117,12 @@ router.post('/:eventId/images', requireAuth, async(req, res, next) => {
         }
     });
 
-    if(attende && attende.status !== 'pending') {
+    const group = await Group.findByPk(event.groupId);
+
+
+    if((attende && attende.status !== 'pending') || req.user.id === group.organizerId) {
         const { url, preview } = req.body;
-        const img = await event.createEventImage({ url, preview });
+        const img = await EventImage.create({ url, preview, eventId: event.id });
 
         res.json(img);
     } else {
