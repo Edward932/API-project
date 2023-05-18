@@ -308,6 +308,10 @@ router.post('/:groupId/events', requireAuth, isOrganizerOrCohost, async(req, res
         return next(e);
     }
 
+    await event.reload({
+        attributes: ['id']
+    });
+
     const payload = event.toJSON();
     delete payload.createdAt;
     delete payload.updatedAt;
