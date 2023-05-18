@@ -12,11 +12,15 @@ router.get('/', async(req, res, next) => {
     const { name, type, startDate } = req.query;
     if(name) where.name = { [Op.like]: `%${name}%` };
     if(type) where.type = type;
-    if(startDate) where.startDate = startDate;
+
+    // const day = new Date(startDate);
+    // const endDay = day.setDate(day.getDate() + 1);
+    // const newDate = new Date(endDay)
+
+    // if(startDate) where.startDate = { [Op.between]: [new Date(startDate), new Date(newDate)] };
 
     const pagination = {};
     let { page, size } = req.query;
-    console.log(page, size);
 
     page = page ?? 1;
     if(page > 10) page = 10;
@@ -36,7 +40,7 @@ router.get('/', async(req, res, next) => {
         err.errors.size = "Size must be greater than or equal to 1";
         hasError = true;
     }
-    if(name && typeof name !== 'string') {
+    if(name && isNaN(parseInt(name))) {
         err.errors.name = "Name must be a string";
         hasError = true;
     }
@@ -44,7 +48,8 @@ router.get('/', async(req, res, next) => {
         err.errors.type = "Type must be 'Online' or 'In Person'";
         hasError = true;
     }
-    if(startDate && new Date(startDate) instanceof Date && !isNaN(new Date(startDate))) {
+
+    if(startDate && isNaN(Date.parse(startDate))) {
         err.errors.startDate = "Start date must be a valid datetime";
         hasError = true;
     };
@@ -55,7 +60,7 @@ router.get('/', async(req, res, next) => {
 
     pagination.limit = size;
     pagination.offset = size * (page - 1);
-    console.log(pagination);
+    console.log(where);
 
     const events = await Event.findAll({
         where,
