@@ -30,10 +30,17 @@ const validateSignup = [
 const router = express.Router();
 
 // Sign up
-router.post('/', validateSignup, async (req, res) => {
+router.post('/', async (req, res, next) => {
     const { email, password, username, firstName, lastName } = req.body;
     const hashedPassword = bcrypt.hashSync(password);
-    const user = await User.create({ email, username, hashedPassword, firstName, lastName });
+    let user;
+    try{
+        user = await User.create({ email, username, hashedPassword, firstName, lastName });
+    } catch(e) {
+        e.message = "Validation Error";
+        e.status = 400;
+        return next(e);
+    }
 
     const safeUser = {
         id: user.id,

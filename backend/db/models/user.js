@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
             }
           },
           notNull: {
-            msg: 'User with that username already exists'
+            msg: 'Username cannot be null'
           }
         }
       },
@@ -43,9 +43,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [3, 256],
-          isEmail: true,
+          isEmail: {
+            args: [true],
+            msg: "Invalid email",
+          },
           notNull: {
-            msg: 'User with that email already exists'
+            msg: 'Email cannot be null'
           }
         }
       },
@@ -54,15 +57,22 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [60, 60],
+          notNull: { msg: 'Password is required' }
         }
       },
       firstName: {
         type: DataTypes.STRING(25),
-        allowNull: false
+        allowNull: false,
+        validate: {
+          notNull: { msg: 'firstName is required'}
+        }
       },
       lastName: {
         type: DataTypes.STRING(30),
-        allowNull: false
+        allowNull: false,
+        validate: {
+          notNull: { msg: 'lastName is required'}
+        }
       }
     }, {
       sequelize,

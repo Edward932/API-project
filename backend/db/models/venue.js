@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Latitude is not valid'
+          msg: 'Latitude is requried'
         },
         isNumeric: {
           args: [true],
@@ -77,7 +77,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Longitude is not valid'
+          msg: 'Longitude is required'
         },
         isNumeric: {
           args: [true],

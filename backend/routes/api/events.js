@@ -7,12 +7,68 @@ const { Event, Attendee, EventImage, Group, Venue, Member, User } = require('../
 const router = express.Router();
 
 // get all events    no auth required
-router.get('/', async(req, res) => {
-    const events = await Event.findAll();
+router.get('/', async(req, res, next) => {
+    const where = {};
+    const { name, type, startDate } = req.query;
+    if(name) where.name = { [Op.like]: `%${name}%` };
+    if(type) where.type = type;
+
+    // const day = new Date(startDate);
+    // const endDay = day.setDate(day.getDate() + 1);
+    // const newDate = new Date(endDay)
+
+    // if(startDate) where.startDate = { [Op.between]: [new Date(startDate), new Date(newDate)] };
+
+    const pagination = {};
+    let { page, size } = req.query;
+
+    page = page ?? 1;
+    if(page > 10) page = 10;
+
+    size = size ?? 20;
+    if(size > 20) size = 20;
+    if(size < 1) size = 1;
+
+    const err = new Error('Bad Request');
+    err.errors = {};
+    let hasError = false;
+    if(page < 1) {
+        err.errors.page = "Page must be greater than or equal to 1";
+        hasError = true;
+    }
+    if(size < 1) {
+        err.errors.size = "Size must be greater than or equal to 1";
+        hasError = true;
+    }
+    if(name && isNaN(parseInt(name))) {
+        err.errors.name = "Name must be a string";
+        hasError = true;
+    }
+    if(type && type !== 'Online' && type !== 'In person') {
+        err.errors.type = "Type must be 'Online' or 'In Person'";
+        hasError = true;
+    }
+
+    if(startDate && isNaN(Date.parse(startDate))) {
+        err.errors.startDate = "Start date must be a valid datetime";
+        hasError = true;
+    };
+
+    if(hasError) {
+        return next(err);
+    }
+
+    pagination.limit = size;
+    pagination.offset = size * (page - 1);
+    console.log(where);
+
+    const events = await Event.findAll({
+        where,
+        ...pagination
+    });
 
     for(let i = 0; i < events.length; i++) {
         const currEvent = events[i].toJSON();
-        console.log(currEvent)
 
         currEvent.numAttending = await Attendee.count({
             where: {

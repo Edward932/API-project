@@ -10,13 +10,11 @@ const { Event, User, Attendee } = require('../models');
 const seed = [
   {
     event: 'new Event 2',
-    user: 'Demo-lition',
-    status: 'pending'
+    user: 'Demo-lition'
   },
   {
     event: 'new Event 2',
-    user: 'FakeUser1',
-    status: 'pending'
+    user: 'FakeUser1'
   },
   {
     event: 'Tennis Group First Meet and Greet',
