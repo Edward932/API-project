@@ -124,7 +124,11 @@ router.post('/:eventId/images', requireAuth, async(req, res, next) => {
         const { url, preview } = req.body;
         const img = await EventImage.create({ url, preview, eventId: event.id });
 
-        res.json(img);
+        res.json({
+            id: img.id,
+            url: img.url,
+            preview: img.preview
+        });
     } else {
         const err = new Error('Forbiden');
         err.status = 403;
