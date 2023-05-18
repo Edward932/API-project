@@ -77,7 +77,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Private must be a boolean'
+          msg: 'Private is required'
         },
         isIn: {
           args: [[true, false, 0, 1]],
