@@ -16,8 +16,6 @@ router.get('/', async(req, res, next) => {
         [Op.gt]: new Date(startDate)
     };
 
-    console.log(where.startDate);
-
     const pagination = {};
     let { page, size } = req.query;
 
@@ -44,7 +42,7 @@ router.get('/', async(req, res, next) => {
         hasError = true;
     }
     if(type && type !== 'Online' && type !== 'In person') {
-        err.errors.type = "Type must be 'Online' or 'In Person'";
+        err.errors.type = "Type must be 'Online' or 'In person'";
         hasError = true;
     }
 
