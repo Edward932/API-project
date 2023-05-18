@@ -22,8 +22,23 @@ const validateLogin = [
 const router = express.Router();
 
 // Log in
-router.post('/', validateLogin, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     const { credential, password } = req.body;
+    const err = new Error('Bad Request');
+    err.errors = {};
+    let hasError = false;
+    if(!credential) {
+        err.errors.email = "Email is required",
+        hasError = true;
+    }
+    if(!password) {
+        err.errors.password = "Password is requried",
+        hasError = true;
+    }
+    if(hasError) {
+        err.status = 400;
+        return next(err);
+    }
 
     const user = await User.unscoped().findOne({
         where: {

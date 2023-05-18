@@ -32,7 +32,12 @@ const router = express.Router();
 // Sign up
 router.post('/', async (req, res, next) => {
     const { email, password, username, firstName, lastName } = req.body;
-    const hashedPassword = bcrypt.hashSync(password);
+    let hashedPassword;
+    try{
+        hashedPassword = bcrypt.hashSync(password);
+    } catch(e) {
+        hashedPassword = null;
+    }
     let user;
     try{
         user = await User.create({ email, username, hashedPassword, firstName, lastName });
