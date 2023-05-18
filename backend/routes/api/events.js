@@ -303,7 +303,8 @@ router.get('/:eventId/attendees', restoreUser, async(req, res) => {
         cohost = await Member.findOne({
             where: {
                 userId: req.user.id,
-                groupId: group.id
+                groupId: group.id,
+                status: 'co-host'
             }
         });
     }
