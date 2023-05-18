@@ -39,7 +39,6 @@ router.get('/current', requireAuth, async(req, res) => {
         where: {
             [Op.or]: {
                 organizerId: req.user.id,
-
             }
         },
         include: {
