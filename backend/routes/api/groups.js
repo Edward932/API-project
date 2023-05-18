@@ -35,23 +35,34 @@ router.get('/', async(req, res, next) => {
 // get groups joined or organized by current user -- auth required
 router.get('/current', requireAuth, async(req, res) => {
 
-    const groups = await Group.findAll({
-        where: {
-            [Op.or]: {
-                organizerId: req.user.id,
-            }
-        },
+    const groups1 = await Group.findAll({
         include: {
             model: User,
-            attributes: ['id'],
-            // where: {
-            //     id: req.user.id
-            // }
+            attributes: [],
+            where: {
+                id: req.user.id
+            }
+        }
+    });
+    const groups2 = await Group.findAll({
+        where: { organizerId: req.user.id }
+    });
+
+    const groups = [];
+    const used = new Set();
+    groups1.forEach(currGroup => {
+        currGroup = currGroup.toJSON();
+        groups.push(currGroup);
+        used.add(currGroup.id);
+    });
+    groups2.forEach(currGroup => {
+        currGroup = currGroup.toJSON();
+        if(!used.has(currGroup.id)) {
+            groups.push(currGroup);
         }
     });
 
     for(let i = 0; i < groups.length; i++) {
-        groups[i] = groups[i].toJSON();
 
         groups[i].numMembers = await Member.count({
             where: {
