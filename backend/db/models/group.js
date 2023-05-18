@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Name must be 60 charecters or less'
+          msg: 'Name is required'
         },
         len: {
           args: [1, 60],
@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'About must be 50 charecters or more'
+          msg: 'About is required'
         },
         len: {
           args: [50, 9999],
@@ -63,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: "Type must be 'Online' or 'In person'"
+          msg: "Type is required"
         },
         isOnlineOrInPerson(value) {
           if(value !== 'Online' && value !== 'In person') {

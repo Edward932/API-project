@@ -22,6 +22,9 @@ module.exports = (sequelize, DataTypes) => {
     url: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: { msg: 'url is required' }
+      }
     },
     preview: {
       type: DataTypes.BOOLEAN,

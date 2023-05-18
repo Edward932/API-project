@@ -57,6 +57,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [60, 60],
+          notNull: { msg: 'Password is required' }
         }
       },
       firstName: {
