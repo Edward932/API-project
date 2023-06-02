@@ -57,7 +57,6 @@ router.get('/', async(req, res, next) => {
 
     pagination.limit = size;
     pagination.offset = size * (page - 1);
-    console.log(where);
 
     const events = await Event.findAll({
         where,
@@ -318,7 +317,6 @@ router.get('/:eventId/attendees', restoreUser, async(req, res) => {
         }
     }
 
-    console.log(where);
     const attendees = await Attendee.findAll({
          where
     });

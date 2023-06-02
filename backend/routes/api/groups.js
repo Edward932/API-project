@@ -252,7 +252,6 @@ router.get('/:groupId/events', async(req, res, next) => {
 
     for(let i = 0; i < events.length; i++) {
         const currEvent = events[i].toJSON();
-        console.log(currEvent)
 
         currEvent.numAttending = await Attendee.count({
             where: {
