@@ -15,7 +15,7 @@ export const getGroupsThunk = () => async dispatch => {
     if(res.ok) {
         const groups = await res.json();
         dispatch(getGroups(groups));
-        console.log(groups);
+        //console.log(groups);
         return groups;
     } else {
         const error = await res.json();
