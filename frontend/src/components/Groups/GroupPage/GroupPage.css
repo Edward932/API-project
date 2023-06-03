@@ -1,0 +1,22 @@
+#group-events-display {
+    background-color: lightgray;
+}
+
+#group-display {
+    display: flex;
+}
+
+.group-img-div-large {
+    width: 60%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 20px;
+}
+
+#group-preview-img {
+    height: 100%;
+    width: auto;
+    border: solid green;
+}

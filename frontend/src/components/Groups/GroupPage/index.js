@@ -1,13 +1,18 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import GroupCard from "../DisplayGroups/GroupCard";
 import { useEffect } from "react";
 import { getGroupByIdThunk } from "../../../store/groups";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import './GroupPage.css'
 
 export default function GroupPage() {
     const { groupId } = useParams();
     const dispatch = useDispatch();
     const group = useSelector(state => state.groups.singleGroup);
+    const previewImage = group?.GroupImages.find(image => image.preview === true);
+    const previewUrl = previewImage?.url;
+
+    //console.log(group)
 
     useEffect(() => {
         dispatch(getGroupByIdThunk(groupId))
@@ -19,23 +24,37 @@ export default function GroupPage() {
         groupPage = (
             <div id="group-page">
                 <div id="group-display">
-                    <div className="group-img-div">
-                        {group.previewImage === "No preview image for group" ? 'No preview image for group' : <img className="group-img" src={group.previewImage} />}
+                    <div className="group-img-div-large">
+                        <Link to ="/groups">{"< Groups"}</Link>
+                        {previewImage ? <img src={previewUrl} id="group-preview-img" alt="preview img"/> : <p id="group-preview-img">No preview image available</p>}
                     </div>
                     <div>
-                        <h3>{group.name}</h3>
-                        <p>{group.city}, {group.state}</p>
-                        <p>{group.about}</p>
-                        <div className="num-private">
-                            <p>ADD NUMBER OF EVENTS</p>
-                            <i className="fa-solid fa-circle"></i>
-                            <p>{group.private ? 'Private' : 'Public'}</p>
+                        <div>
+                            <h3>{group.name}</h3>
+                            <p>{group.city}, {group.state}</p>
+                            <div className="num-private">
+                                <p>ADD NUMBER OF EVENTS</p>
+                                <i className="fa-solid fa-circle"></i>
+                                <p>{group.private ? 'Private' : 'Public'}</p>
+                            </div>
+                            {group.Organizer ? <p>Organized by {group.Organizer.firstName} {group.Organizer.lastName}</p> : "No group organizer"}
                         </div>
+                        <button>Join this group</button>
                     </div>
                 </div>
-            <div id="group-events-display">
-                ADD EVENTS PART
-            </div>
+                <div id="group-events-display">
+                    <div>
+                        <h3>Organizer</h3>
+                        {group.Organizer ? <p>{group.Organizer.firstName} {group.Organizer.lastName}</p> : "No group organizer"}
+                    </div>
+                    <div>
+                        <h3>Whate we're about</h3>
+                        <p>{group.about}</p>
+                    </div>
+                    <div>
+                        ADD EVENT PART !!!!!!!!
+                    </div>
+                </div>
             </div>
         );
     };
