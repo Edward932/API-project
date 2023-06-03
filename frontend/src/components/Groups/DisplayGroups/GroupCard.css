@@ -1,0 +1,27 @@
+.group-card {
+    display: flex;
+    flex-direction: row;
+    border-top: solid 2px lightgray;
+
+}
+
+.group-img {
+    width: 250px;
+}
+
+.group-img-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.num-private {
+    display: flex;
+    align-items: center;
+    grid-gap: 10px
+}
+
+.fa-circle {
+    font-size: 5px;
+}
