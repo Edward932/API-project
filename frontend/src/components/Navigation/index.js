@@ -9,7 +9,7 @@ function Navigation({ isLoaded }){
   return (
     <ul>
       <li>
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/"><img id="home-button" src="https://www.meetup.com/mu_static/en-US/logo--script.257d0bb1.svg" alt="meetup-logo"/></NavLink>
       </li>
       {isLoaded && (
         <li>

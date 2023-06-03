@@ -1,0 +1,56 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10%;
+    padding-right: 10%;
+    justify-content: space-around;
+    height: 90%;
+}
+
+#top-div {
+    display: flex;
+    column-gap: 20px;
+}
+
+#title-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+}
+
+#main-img {
+    width: 100%;
+}
+
+#bottom-links {
+    display: flex;
+    flex-direction: row;
+}
+
+.sub-imgs {
+    width: 150px;
+}
+
+#button-div-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mid-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
+
+.link-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,3 +1,15 @@
 .hidden {
     display: none;
 }
+
+#home-button {
+    width: 100px;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 5px;
+    list-style: none;
+}
