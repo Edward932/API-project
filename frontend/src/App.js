@@ -7,6 +7,7 @@ import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import HomePage from "./components/HomePage";
 import DisplayGroups from "./components/Groups/DisplayGroups";
 import GroupAndEventDisplay from "./components/GroupAndEventDisplay";
+import GroupPage from "./components/Groups/GroupPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,8 +21,11 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded &&
         <Switch>
-          <Route path="/groups">
+          <Route exact path="/groups">
             <GroupAndEventDisplay type="groups"/>
+          </Route>
+          <Route path="/groups/:groupId">
+            <GroupPage />
           </Route>
           <Route path="/events">
             <GroupAndEventDisplay type="events" />

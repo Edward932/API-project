@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom'
 import './GroupCard.css'
 
 export default function GroupCard({ group }) {
-    //console.log('group in GroupCard componenent', group.previewImage)
+    console.log('group in GroupCard componenent', group)
 
     return (
-        <div className="group-card">
+        <Link to={`/groups/${group.id}`} className="group-card">
             <div className="group-img-div">
                 {group.previewImage === "No preview image for group" ? 'No preview image for group' : <img className="group-img" src={group.previewImage} />}
             </div>
@@ -18,6 +19,6 @@ export default function GroupCard({ group }) {
                     <p>{group.private ? 'Private' : 'Public'}</p>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }

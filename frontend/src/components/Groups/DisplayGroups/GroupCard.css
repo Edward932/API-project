@@ -2,7 +2,9 @@
     display: flex;
     flex-direction: row;
     border-top: solid 2px lightgray;
-
+    /* cursor: pointer; */
+    text-decoration: none;
+    color: black
 }
 
 .group-img {
