@@ -1,0 +1,19 @@
+#outer-group-and-event {
+    margin: 0 20%;
+}
+
+Link {
+    font-size: 50px;
+}
+
+.main-link-group-events {
+    font-size: 30px;
+    margin-right: 30px;
+    text-decoration: none;
+    color: gray;
+}
+
+.selected {
+    text-decoration: underline;
+    color: red;
+}
