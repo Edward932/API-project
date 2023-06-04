@@ -1,4 +1,4 @@
-import { csrfFetch } from "./csrf";
+// import { csrfFetch } from "./csrf";
 
 const GET_ALL_GROUPS = 'groups/getGroups';
 const GET_GROUP = 'groups/getGroupById'
@@ -44,7 +44,7 @@ export const getGroupByIdThunk = (groupId) => async dispatch => {
     }
 }
 
-const initialState = { groups: { allGroups: {}, singleGroup: {}, }, };
+const initialState = { allGroups: {}, singleGroup: {} };
 
 const groupsReducer = (state = initialState, action) => {
     switch(action.type) {

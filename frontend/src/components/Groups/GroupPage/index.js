@@ -1,22 +1,21 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
 import { getGroupByIdThunk } from "../../../store/groups";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import './GroupPage.css'
+
+import GroupEvents from "./GroupEvents";
 
 export default function GroupPage() {
     const { groupId } = useParams();
     const dispatch = useDispatch();
     const group = useSelector(state => state.groups.singleGroup);
-    const previewImage = group?.GroupImages.find(image => image.preview === true);
+    const previewImage = group.GroupImages?.find(image => image.preview === true);
     const previewUrl = previewImage?.url;
-
-    //console.log(group)
 
     useEffect(() => {
         dispatch(getGroupByIdThunk(groupId))
-    }, [dispatch]);
+    }, [dispatch, groupId]);
 
     let groupPage = (<h3 className="loading">Loading ....</h3>);
 
@@ -48,11 +47,11 @@ export default function GroupPage() {
                         {group.Organizer ? <p>{group.Organizer.firstName} {group.Organizer.lastName}</p> : "No group organizer"}
                     </div>
                     <div>
-                        <h3>Whate we're about</h3>
+                        <h3>What we're about</h3>
                         <p>{group.about}</p>
                     </div>
                     <div>
-                        ADD EVENT PART !!!!!!!!
+                        <GroupEvents groupId={groupId}/>
                     </div>
                 </div>
             </div>
