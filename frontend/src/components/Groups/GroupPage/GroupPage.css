@@ -20,3 +20,31 @@
     width: auto;
     border: solid green;
 }
+
+#group-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#join-group {
+    background-color: red;
+    color: white;
+    box-shadow: 2px 2px black;
+    height: 50px;
+    font-size: 20px;
+}
+
+#organizer-buttons {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+#organizer-buttons button{
+    background-color: blue;
+    color: white;
+    box-shadow: 2px 2px black;
+    height: 30px;
+    font-size: 15px;
+}

@@ -18,10 +18,6 @@ export default function GroupEvents({ groupId }) {
         else pastEvents.push(event);
     });
 
-    console.log('events on group page', eventsArr);
-    console.log('past events', pastEvents);
-    console.log('upComingEvents', upComingEvents);
-
     useEffect(() => {
         dispatch(getEventsByGroupThunk(groupId))
     }, [dispatch, groupId]);

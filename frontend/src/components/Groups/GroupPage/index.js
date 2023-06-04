@@ -17,6 +17,29 @@ export default function GroupPage() {
         dispatch(getGroupByIdThunk(groupId))
     }, [dispatch, groupId]);
 
+    const handleJoin = () => alert('Feature coming soon');
+
+    const user = useSelector(state => state.session.user);
+
+    let joinButton = null;
+    if(user && user.id !== group.Organizer?.id) {
+        joinButton = (
+            <button id="join-group" onClick={handleJoin}>Join this group</button>
+        );
+    }
+
+    let organizerButtons = null;
+    if(user && user.id === group.Organizer?.id) {
+        organizerButtons = (
+            <div id="organizer-buttons">
+                (NOT READY YET)
+                <button>Create Event</button>
+                <button>Update</button>
+                <button>Delete</button>
+            </div>
+        )
+    }
+
     let groupPage = (<h3 className="loading">Loading ....</h3>);
 
     if(group) {
@@ -27,7 +50,7 @@ export default function GroupPage() {
                         <Link to ="/groups">{"< Groups"}</Link>
                         {previewImage ? <img src={previewUrl} id="group-preview-img" alt="preview img"/> : <p id="group-preview-img">No preview image available</p>}
                     </div>
-                    <div>
+                    <div id="group-info">
                         <div>
                             <h3>{group.name}</h3>
                             <p>{group.city}, {group.state}</p>
@@ -38,7 +61,8 @@ export default function GroupPage() {
                             </div>
                             {group.Organizer ? <p>Organized by {group.Organizer.firstName} {group.Organizer.lastName}</p> : "No group organizer"}
                         </div>
-                        <button>Join this group</button>
+                        {joinButton}
+                        {organizerButtons}
                     </div>
                 </div>
                 <div id="group-events-display">
