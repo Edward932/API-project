@@ -1,6 +1,7 @@
 import { getEventsByGroupThunk } from "../../../store/events";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { Link } from 'react-router-dom';
 
 
 export default function GroupEvents({ groupId }) {
@@ -44,14 +45,17 @@ export default function GroupEvents({ groupId }) {
                     const normalizedFor12 = timeArr.join(':');
 
                     return (
-                    <div key={event.id} className="group-event-card">
-                        <img src={event.previewImage} alt="event image" className="group-event-img"/>
-                        <div>
-                            <p className="group-event-time">{date} <i className="fa-solid fa-circle"></i> {normalizedFor12}</p>
-                            <h3>{event.name}</h3>
-                            <p>{event.venue && `${event.venue.city}, ${event.venue.state}`}</p>
-                        </div>
-                    </div>
+                        <Link to={`/events/${event.id}`} key={event.id} className="group-event-link">
+                            <div className="upper-event-card">
+                                <img src={event.previewImage} alt="event image" className="group-event-img"/>
+                                <div>
+                                    <p className="group-event-time">{date} <i className="fa-solid fa-circle"></i> {normalizedFor12}</p>
+                                    <h3>{event.name}</h3>
+                                    <p>{event.venue && `${event.venue.city}, ${event.venue.state}`}</p>
+                                </div>
+                            </div>
+                            <p>{event.description}</p>
+                        </Link>
                     );
                 })}
             </div>
