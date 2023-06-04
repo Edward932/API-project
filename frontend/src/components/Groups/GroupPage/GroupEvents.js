@@ -22,16 +22,38 @@ export default function GroupEvents({ groupId }) {
         dispatch(getEventsByGroupThunk(groupId))
     }, [dispatch, groupId]);
 
+    console.log(upComingEvents);
+
     let upComingDiv;
     if(upComingEvents.length) {
         upComingDiv = (
             <div>
                 <h3>Upcoming Events ({upComingEvents.length})</h3>
-                {upComingEvents.map(event => (
-                    <div key={event.id}>
-                        {event.name}
+                {upComingEvents.map(event => {
+                    const time = new Date(event.startDate);
+                    const date = time.toDateString();
+                    const timeOfDay = time.toTimeString().split(' ')[0];
+                    const timeArr = timeOfDay.split(':');
+                    if(timeArr[0] > 12) {
+                        timeArr[0] -= 12;
+                        timeArr[1] += ' PM'
+                    } else {
+                        timeArr[0] += ' AM'
+                    }
+                    timeArr.pop();
+                    const normalizedFor12 = timeArr.join(':');
+
+                    return (
+                    <div key={event.id} className="group-event-card">
+                        <img src={event.previewImage} alt="event image" className="group-event-img"/>
+                        <div>
+                            <p className="group-event-time">{date} <i className="fa-solid fa-circle"></i> {normalizedFor12}</p>
+                            <h3>{event.name}</h3>
+                            <p>{event.venue && `${event.venue.city}, ${event.venue.state}`}</p>
+                        </div>
                     </div>
-                ))}
+                    );
+                })}
             </div>
         )
     } else {

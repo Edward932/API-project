@@ -42,9 +42,26 @@
 }
 
 #organizer-buttons button{
-    background-color: blue;
+    background-color: darkgray;
     color: white;
     box-shadow: 2px 2px black;
     height: 30px;
     font-size: 15px;
+}
+
+.group-event-card {
+    display: flex;
+    border: 2px solid blue;
+    column-gap: 20px;
+}
+
+.group-event-img {
+    width: auto;
+    height: 200px;
+}
+
+.group-event-time {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
 }
