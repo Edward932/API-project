@@ -43,9 +43,12 @@ function SignupFormModal() {
 
   return (
     <div id="sign-up-form">
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <div id="title-logo-signup">
+        <img id="signup-logo" src="https://logosandtypes.com/wp-content/uploads/2020/07/meetup.svg" alt="meet-up logo"/>
+        <h1>Sign Up</h1>
+      </div>
+      <form id="signup-form" onSubmit={handleSubmit}>
+        <label className="signup-labels">
           Email
           <input
             type="text"
@@ -55,7 +58,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
-        <label>
+        <label className="signup-labels">
           Username
           <input
             type="text"
@@ -65,7 +68,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.username && <p>{errors.username}</p>}
-        <label>
+        <label className="signup-labels">
           First Name
           <input
             type="text"
@@ -75,7 +78,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.firstName && <p>{errors.firstName}</p>}
-        <label>
+        <label className="signup-labels">
           Last Name
           <input
             type="text"
@@ -85,7 +88,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.lastName && <p>{errors.lastName}</p>}
-        <label>
+        <label className="signup-labels">
           Password
           <input
             type="password"
@@ -95,7 +98,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <label>
+        <label className="signup-labels">
           Confirm Password
           <input
             type="password"
@@ -108,6 +111,7 @@ function SignupFormModal() {
           <p>{errors.confirmPassword}</p>
         )}
         <button
+          className="signup-button"
           type="submit"
           disabled={!email.length || username.length < 4 || !firstName.length || !lastName.length || password.length < 6 || confirmPassword.length < 6}
         >

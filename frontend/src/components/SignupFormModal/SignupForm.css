@@ -1,7 +1,48 @@
 #sign-up-form {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    border: 20px solid blue;
-    background-color: orange;
+    width: 400px;
+    padding: 10px 20px 50px 20px;
+}
+
+#modal-content {
+    border-radius: 15px;
+}
+
+#signup-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 300px;
+}
+
+.signup-labels {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-button {
+    height: 40px;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 7px;
+}
+
+.signup-button:disabled {
+    background-color: white;
+    color: grey;
+    border: 2px lightgrey solid;
+}
+
+#signup-logo {
+    height: 45px;
+}
+
+#title-logo-signup {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
 }
