@@ -35,7 +35,7 @@ export default function HomePage() {
                 </div>
                 <div className='link-cards'>
                     <img className="sub-imgs"src="https://www.meetup.com/blog/wp-content/uploads/2020/08/holding-hands.jpg" alt="carton computer" />
-                    <Link to="/events/new">Start a new group</Link>
+                    <Link to="/groups/new">Start a new group</Link>
                     <p>You don’t have to be an expert to gather people together and explore shared interests.</p>
                 </div>
             </div>
