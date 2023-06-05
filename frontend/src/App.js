@@ -5,7 +5,6 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import HomePage from "./components/HomePage";
-import DisplayGroups from "./components/Groups/DisplayGroups";
 import GroupAndEventDisplay from "./components/GroupAndEventDisplay";
 import GroupPage from "./components/Groups/GroupPage";
 import CreateGroup from "./components/Groups/CreateGroup";
