@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const GET_ALL_GROUPS = 'groups/getGroups';
 const GET_GROUP = 'groups/getGroupById';
 const CREATE_GROUP = 'groups/createGroup';
+const DELETE_GROUP = 'groups/deleteGroup';
 
 const getGroups = (groups) => {
     return {
@@ -24,6 +25,13 @@ const createGroup = (group) => {
         group
     }
 };
+
+const deleteGroup = (groupId) => {
+    return {
+        type: DELETE_GROUP,
+        groupId
+    }
+}
 
 export const getGroupsThunk = () => async dispatch => {
     const res = await fetch('/api/groups');

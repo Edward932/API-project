@@ -1,13 +1,16 @@
 import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getGroupByIdThunk } from "../../../store/groups";
+import OpenModalButton from '../../OpenModalButton';
 import './GroupPage.css'
 
 import GroupEvents from "./GroupEvents";
+import DeleteGroupModal from "./DeleteGroupModal";
 
 export default function GroupPage() {
     const { groupId } = useParams();
+    const [showMenu, setShowMenu] = useState(false);
     const dispatch = useDispatch();
     const group = useSelector(state => state.groups.singleGroup);
     const previewImage = group.GroupImages?.find(image => image.preview === true);
@@ -18,6 +21,8 @@ export default function GroupPage() {
     }, [dispatch, groupId]);
 
     const handleJoin = () => alert('Feature coming soon');
+
+    const closeMenu = () => setShowMenu(false);
 
     const user = useSelector(state => state.session.user);
 
@@ -35,7 +40,11 @@ export default function GroupPage() {
                 (NOT READY YET)
                 <button>Create Event</button>
                 <button>Update</button>
-                <button>Delete</button>
+                <OpenModalButton
+                    buttonText="Delete"
+                    onButtonClick={closeMenu}
+                    modalComponent={<DeleteGroupModal groupId={groupId}/>}
+                />
             </div>
         )
     }
