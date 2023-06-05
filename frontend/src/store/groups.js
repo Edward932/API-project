@@ -1,7 +1,8 @@
-// import { csrfFetch } from "./csrf";
+import { csrfFetch } from "./csrf";
 
 const GET_ALL_GROUPS = 'groups/getGroups';
-const GET_GROUP = 'groups/getGroupById'
+const GET_GROUP = 'groups/getGroupById';
+const CREATE_GROUP = 'groups/createGroup';
 
 const getGroups = (groups) => {
     return {
@@ -15,7 +16,14 @@ const getGroupById = (group) => {
         type: GET_GROUP,
         group
     }
-}
+};
+
+const createGroup = (group) => {
+    return {
+        type: CREATE_GROUP,
+        group
+    }
+};
 
 export const getGroupsThunk = () => async dispatch => {
     const res = await fetch('/api/groups');
@@ -42,6 +50,23 @@ export const getGroupByIdThunk = (groupId) => async dispatch => {
         const error = await res.json();
         return error;
     }
+};
+
+export const createGroupThunk = (group) => async dispatch => {
+    const res = await csrfFetch('/api/groups', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(group)
+    });
+
+    if(res.ok) {
+        const group = res.json();
+        dispatch(createGroup(group));
+        return group;
+    } else {
+        const error = res.json();
+        return error;
+    }
 }
 
 const initialState = { allGroups: {}, singleGroup: {} };
@@ -56,7 +81,9 @@ const groupsReducer = (state = initialState, action) => {
             })
             return { ...state, allGroups: normalizedGroups };
         case GET_GROUP:
-            return { ...state, singleGroup: action.group }
+            return { ...state, singleGroup: action.group };
+        case CREATE_GROUP:
+            return { ...state, singleGroup: action.group};
         default:
             return state;
     }

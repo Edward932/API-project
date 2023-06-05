@@ -5,9 +5,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import HomePage from "./components/HomePage";
-import DisplayGroups from "./components/Groups/DisplayGroups";
 import GroupAndEventDisplay from "./components/GroupAndEventDisplay";
 import GroupPage from "./components/Groups/GroupPage";
+import CreateGroup from "./components/Groups/CreateGroup";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +23,9 @@ function App() {
         <Switch>
           <Route exact path="/groups">
             <GroupAndEventDisplay type="groups"/>
+          </Route>
+          <Route exact path="/groups/new">
+            <CreateGroup />
           </Route>
           <Route path="/groups/:groupId">
             <GroupPage />
