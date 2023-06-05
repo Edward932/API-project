@@ -30,7 +30,7 @@ const validateSignup = [
 const router = express.Router();
 
 // Sign up
-router.post('/', async (req, res, next) => {
+router.post('/', validateSignup, async (req, res, next) => {
     const { email, password, username, firstName, lastName } = req.body;
     let hashedPassword;
     try{
