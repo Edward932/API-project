@@ -55,7 +55,7 @@ export default function GroupPage() {
                             <h3>{group.name}</h3>
                             <p>{group.city}, {group.state}</p>
                             <div className="num-private">
-                                <p>ADD NUMBER OF EVENTS</p>
+                                <p>{group.numMembers} members</p>
                                 <i className="fa-solid fa-circle"></i>
                                 <p>{group.private ? 'Private' : 'Public'}</p>
                             </div>
