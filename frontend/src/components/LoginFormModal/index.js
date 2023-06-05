@@ -28,34 +28,39 @@ function LoginFormModal() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
+    <div id="login-form-div">
+      <div id="title-logo-login">
+        <img id="logo-login" src="https://logosandtypes.com/wp-content/uploads/2020/07/meetup.svg" alt="meet-up logo"/>
+        <h1>Log In</h1>
+      </div>
+      {errors.credential && (
+          <p id="login-errors">{errors.credential}</p>
+        )}
+      <form id="login-form" onSubmit={handleSubmit}>
+        <label className="login-labels">
           Username or Email
           <input
+            className="login-input"
             type="text"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
           />
         </label>
-        <label>
+        <label className="login-labels">
           Password
           <input
+            className="login-input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        {errors.credential && (
-          <p>{errors.credential}</p>
-        )}
-        <button type="submit" disabled={credential.length < 4 || password.length < 6}>Log In</button>
+        <button className="login-button" type="submit" disabled={credential.length < 4 || password.length < 6}>Log In</button>
       </form>
-      <button onClick={(e) => handleSubmit(e, true)}>Log In as Demo</button>
-    </>
+      <button id='demo-login' onClick={(e) => handleSubmit(e, true)}>Log In as Demo</button>
+    </div>
   );
 }
 
