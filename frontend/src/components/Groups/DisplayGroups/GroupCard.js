@@ -14,7 +14,7 @@ export default function GroupCard({ group }) {
                 <p>{group.city}, {group.state}</p>
                 <p>{group.about}</p>
                 <div className="num-private">
-                    <p>ADD NUMBER OF EVENTS</p>
+                    <p>{group.numMembers} members</p>
                     <i className="fa-solid fa-circle"></i>
                     <p>{group.private ? 'Private' : 'Public'}</p>
                 </div>
