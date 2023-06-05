@@ -54,3 +54,8 @@
     flex-direction: column;
     align-items: center;
 }
+
+.disabled-link {
+    pointer-events: none;
+    color: grey;
+}

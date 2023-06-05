@@ -1,7 +1,9 @@
 import './HomePage.css'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 export default function HomePage() {
+    const user = useSelector(state => state.session.user);
 
     return (
         <div className="home-page">
@@ -35,7 +37,7 @@ export default function HomePage() {
                 </div>
                 <div className='link-cards'>
                     <img className="sub-imgs"src="https://www.meetup.com/blog/wp-content/uploads/2020/08/holding-hands.jpg" alt="carton computer" />
-                    <Link to="/groups/new">Start a new group</Link>
+                    <Link to="/groups/new" className={user ? "" : "disabled-link"}>Start a new group</Link>
                     <p>You don’t have to be an expert to gather people together and explore shared interests.</p>
                 </div>
             </div>
