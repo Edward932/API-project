@@ -75,6 +75,21 @@ export const createGroupThunk = (group) => async dispatch => {
         const error = res.json();
         return error;
     }
+};
+
+export const deleteGroupThunk = (groupId) => async dispatch => {
+    const res = await csrfFetch(`/api/groups/${groupId}`, {
+        method: 'DELETE'
+    });
+
+    if(res.ok) {
+        const message = res.json()
+        dispatch(deleteGroup(groupId));
+        return message;
+    } else {
+        const error = res.json();
+        return error;
+    }
 }
 
 const initialState = { allGroups: {}, singleGroup: {} };

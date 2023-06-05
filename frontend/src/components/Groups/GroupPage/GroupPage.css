@@ -92,12 +92,13 @@
 
 #delete-group-button-div {
     display: flex;
-    column-gap: 20px;
+    flex-direction: column;
+    row-gap: 10px;
 }
 
 #delete-group-button-div button {
     height: 40px;
-    width: 150px;
+    width: 250px;
     border: none;
     border-radius: 7px;
 }
