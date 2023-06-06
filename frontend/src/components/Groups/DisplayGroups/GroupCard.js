@@ -7,7 +7,7 @@ export default function GroupCard({ group }) {
     return (
         <Link to={`/groups/${group.id}`} className="group-card">
             <div className="group-img-div">
-                {group.previewImage === "No preview image for group" ? 'No preview image for group' : <img className="group-img" src={group.previewImage} />}
+                {group.previewImage === "No preview image for group" ? 'No preview image for group' : <img className="group-img" src={group.previewImage} alt='previewIMg'/>}
             </div>
             <div>
                 <h3>{group.name}</h3>

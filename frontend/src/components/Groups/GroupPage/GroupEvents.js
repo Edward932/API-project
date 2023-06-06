@@ -24,7 +24,6 @@ export default function GroupEvents({ groupId }) {
         dispatch(getEventsByGroupThunk(groupId))
     }, [dispatch, groupId]);
 
-
     let upComingDiv;
     if(upComingEvents.length) {
         upComingDiv = (
@@ -47,7 +46,7 @@ export default function GroupEvents({ groupId }) {
                     return (
                         <Link to={`/events/${event.id}`} key={event.id} className="group-event-link">
                             <div className="upper-event-card">
-                                <img src={event.previewImage} alt="event image" className="group-event-img"/>
+                                <img src={event.previewImage} alt="event" className="group-event-img"/>
                                 <div>
                                     <p className="group-event-time">{date} <i className="fa-solid fa-circle"></i> {normalizedFor12}</p>
                                     <h3>{event.name}</h3>
