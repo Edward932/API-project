@@ -41,8 +41,6 @@ function SignupFormModal() {
     });
   };
 
-  console.log('errors', Object.entries(errors));
-
   return (
     <div id="sign-up-form">
       <div id="title-logo-signup">
@@ -55,6 +53,7 @@ function SignupFormModal() {
           <input
             type="text"
             value={email}
+            maxLength={256}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -65,6 +64,7 @@ function SignupFormModal() {
           <input
             type="text"
             value={username}
+            maxLength={30}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
@@ -75,6 +75,7 @@ function SignupFormModal() {
           <input
             type="text"
             value={firstName}
+            maxLength={25}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
@@ -85,6 +86,7 @@ function SignupFormModal() {
           <input
             type="text"
             value={lastName}
+            maxLength={30}
             onChange={(e) => setLastName(e.target.value)}
             required
           />
