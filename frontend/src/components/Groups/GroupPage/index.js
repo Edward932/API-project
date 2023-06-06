@@ -51,7 +51,7 @@ export default function GroupPage() {
 
     let groupPage = (<h3 className="loading">Loading ....</h3>);
 
-    if(group) {
+    if(group && +groupId === group?.id) {
         groupPage = (
             <div id="group-page">
                 <div id="group-display">

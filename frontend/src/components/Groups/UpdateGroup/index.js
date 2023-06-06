@@ -98,7 +98,7 @@ export default function UpdateGroup() {
 
     return (
         <div>
-            <h1>Start a new group</h1>
+            <h1>Update your Group</h1>
             <form onSubmit={handleSubmit}>
                 <label>
                     <h3>Set your group's location.</h3>
