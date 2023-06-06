@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import './GroupCard.css'
 
 export default function GroupCard({ group }) {
-    console.log('group in GroupCard componenent', group)
+    //console.log('group in GroupCard componenent', group)
 
     return (
         <Link to={`/groups/${group.id}`} className="group-card">

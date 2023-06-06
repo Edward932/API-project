@@ -16,8 +16,7 @@ export default function CreateGroup() {
     const [type, setType] = useState('');
     const [privateBoolean, setPrivateBoolean] = useState('');
     const [validationErors, setValidationErrors] = useState({});
-    //const [imgURL, setImgURL] = useState('');
-
+    const [imgURL, setImgURL] = useState('');
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -29,6 +28,8 @@ export default function CreateGroup() {
         if(about.length < 50) errors.about = "About must be 50 charectors or more";
         if(privateBoolean === '') errors.privateBoolean = "private or public is required";
         if(!type) errors.type = "Type is required";
+        if(!imgURL) errors.imgURL = "Img URL is required";
+        if(!imgURL.endsWith('.png') && !imgURL.endsWith('.jpg') && !imgURL.endsWith('.jpeg')) errors.imgURL = "Image URL must end in .png, .jpg or .jpeg";
 
         if(Object.values(errors).length) {
             setValidationErrors(errors);
@@ -46,7 +47,7 @@ export default function CreateGroup() {
 
         let group;
         try{
-            group = await dispatch(createGroupThunk(payload));
+            group = await dispatch(createGroupThunk(payload, imgURL));
 
             history.push(`/groups/${group.id}`)
         } catch(e) {
@@ -192,7 +193,12 @@ export default function CreateGroup() {
                 </label>
                 <label>
                     <p>Please add an image url for your group below</p>
-                    <input placeholder="image URL"/>
+                    <input
+                        placeholder="image URL"
+                        value={imgURL}
+                        onChange={(e) => setImgURL(e.target.value)}
+                    />
+                    <p className='errors-group-create'>{validationErors.imgURL}</p>
                 </label>
                 <button type="submit">Create group</button>
             </form>

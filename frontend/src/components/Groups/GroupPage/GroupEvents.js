@@ -23,7 +23,7 @@ export default function GroupEvents({ groupId }) {
         dispatch(getEventsByGroupThunk(groupId))
     }, [dispatch, groupId]);
 
-    console.log(upComingEvents);
+    //console.log(upComingEvents);
 
     let upComingDiv;
     if(upComingEvents.length) {

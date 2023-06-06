@@ -5,6 +5,8 @@ const GET_GROUP = 'groups/getGroupById';
 const CREATE_GROUP = 'groups/createGroup';
 const DELETE_GROUP = 'groups/deleteGroup';
 const UPDATE_GROUP = 'groups/updateGroup';
+const ADD_IMG = 'groups/addImgURL';
+const UPDATE_IMG = 'groupt/updateIMG'
 
 const getGroups = (groups) => {
     return {
@@ -27,6 +29,14 @@ const createGroup = (group) => {
     }
 };
 
+const addImgURL = (groupId, img) => {
+    return {
+        type: ADD_IMG,
+        groupId,
+        img
+    }
+};
+
 const deleteGroup = (groupId) => {
     return {
         type: DELETE_GROUP,
@@ -38,6 +48,12 @@ const updateGroup = (group) => {
     return {
         type: UPDATE_GROUP,
         group
+    }
+};
+
+const updateIMG = () => {
+    return {
+        type: UPDATE_IMG
     }
 }
 
@@ -61,14 +77,14 @@ export const getGroupByIdThunk = (groupId) => async dispatch => {
     if(res.ok) {
         const group = await res.json();
         dispatch(getGroupById(group));
-        return group
+        return group;
     } else {
         const error = await res.json();
         return error;
     }
 };
 
-export const createGroupThunk = (group) => async dispatch => {
+export const createGroupThunk = (group, imgURL) => async dispatch => {
     const res = await csrfFetch('/api/groups', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -76,7 +92,9 @@ export const createGroupThunk = (group) => async dispatch => {
     });
 
     if(res.ok) {
-        const group = res.json();
+        const group = await res.json();
+        await dispatch(addImgURLThunk(group.id, imgURL));
+
         dispatch(createGroup(group));
         return group;
     } else {
@@ -84,6 +102,27 @@ export const createGroupThunk = (group) => async dispatch => {
         return error;
     }
 };
+
+export const addImgURLThunk = (groupId, imgURL) => async dispatch => {
+    const res = await csrfFetch(`/api/groups/${groupId}/images`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: imgURL, preview: true })
+    });
+
+    if(res.ok) {
+        const img = await res.json();
+        dispatch(addImgURL(groupId, img));
+        return img;
+    } else {
+        const error = await res.json();
+        return error;
+    }
+};
+
+export const updateIMGThunk = () => async dispatch => {
+
+}
 
 export const deleteGroupThunk = (groupId) => async dispatch => {
     const res = await csrfFetch(`/api/groups/${groupId}`, {
@@ -100,7 +139,7 @@ export const deleteGroupThunk = (groupId) => async dispatch => {
     }
 };
 
-export const updateGroupThunk = (group, groupId) => async dispatch => {
+export const updateGroupThunk = (group, groupId, imgURL) => async dispatch => {
     const res = await csrfFetch(`/api/groups/${groupId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json'},
@@ -108,7 +147,9 @@ export const updateGroupThunk = (group, groupId) => async dispatch => {
     });
 
     if(res.ok) {
-        const group = res.json();
+        const group = await res.json();
+        await dispatch(addImgURLThunk(group.id, imgURL));
+
         dispatch(updateGroup(group));
         return group;
     } else {

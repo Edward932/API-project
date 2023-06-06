@@ -16,9 +16,8 @@
 }
 
 #group-preview-img {
-    height: 100%;
-    width: auto;
-    border: solid green;
+    height: auto;
+    width: 100%;
 }
 
 #group-info {
