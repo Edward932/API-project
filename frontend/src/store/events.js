@@ -1,8 +1,9 @@
-// import { csrfFetch } from "./csrf";
+import { csrfFetch } from "./csrf";
 
 const GET_EVENTS_BY_GROUP = 'events/getEventsByGroup';
 const GET_EVENTS = 'events/getEvents';
 const GET_EVENT_BY_ID = 'events/getEventById';
+const DELETE_EVENT = 'events/delteEvent';
 
 const getEventsByGroup = events => {
     return {
@@ -24,6 +25,13 @@ const getEventById = (event) => {
         event
     }
 };
+
+const deleteEvent = (eventId) => {
+    return {
+        type: DELETE_EVENT,
+        eventId
+    }
+}
 
 export const getEventsByGroupThunk = groupId => async dispatch => {
     const res = await fetch(`/api/groups/${groupId}/events`);
@@ -62,6 +70,22 @@ export const getEventByIdThunk = eventId => async dispatch => {
         const error = await res.json();
         return error;
     }
+};
+
+export const deleteEventThunk = eventId => async dispatch => {
+    console.log(eventId);
+    const res = await csrfFetch(`/api/events/${eventId}`, {
+        method: 'DELETE'
+    });
+
+    if(res.ok) {
+        const message = await res.json();
+        dispatch(deleteEvent(eventId));
+        return message;
+    } else {
+        const error = await res.json();
+        return error;
+    }
 }
 
 const initialState = { allEvents: {}, singleEvent: {}, groupEvents: [] };
@@ -78,7 +102,11 @@ const eventReducer = (state = initialState, action) => {
             });
             return { ...state, allEvents: normalizedEvents };
         case GET_EVENT_BY_ID:
-            return { ...state, singleEvent: action.event}
+            return { ...state, singleEvent: action.event};
+        case DELETE_EVENT:
+            const newAllEvents = { ...state.allEvents};
+            delete newAllEvents[action.eventId];
+            return { ...state, allEvents: newAllEvents, singleEvent: {} }
         default:
             return state;
     }

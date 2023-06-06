@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { getEventByIdThunk } from "../../../store/events";
 import './EventPage.css'
 import { getGroupByIdThunk } from "../../../store/groups";
+import OpenModalButton from "../../OpenModalButton";
+import DeleteEventModal from "./DeleteEventModal";
 
 export default function EventPage() {
     const { eventId } = useParams();
@@ -11,6 +13,11 @@ export default function EventPage() {
 
     const event = useSelector(state => state.events.singleEvent);
     const group = useSelector(state => state.groups.singleGroup);
+    const user = useSelector(state => state.session.user);
+
+
+    const [showMenu, setShowMenu] = useState(false);
+    const closeMenu = () => setShowMenu(false);
 
     const previewImage = event.EventImages?.find(image => image.preview === true);
     const previewUrl = previewImage?.url;
@@ -53,15 +60,19 @@ export default function EventPage() {
     }, [dispatch, eventId]);
 
     let hostButtons = null;
-    // if(user && user.id === group.Organizer?.id) {
-    //     hostButtons = (
-    //         <div>
-    //             <button>
-
-    //             </button>
-    //         </div>
-    //     )
-    // }
+    if(user && user.id === group.Organizer?.id) {
+        console.log('eventID', eventId);
+        hostButtons = (
+            <div>
+                <button onClick={() => alert('feature coming soon')}>Update</button>
+                <OpenModalButton
+                    buttonText="Delete"
+                    onButtonClick={closeMenu}
+                    modalComponent={<DeleteEventModal eventId={eventId}/>}
+                />
+            </div>
+        )
+    }
 
 
     let eventPage = (<h3 className="loading">Loading ....</h3>);
@@ -99,6 +110,7 @@ export default function EventPage() {
                                 <p>{event.type}</p>
                             </div>
                         </div>
+                        {hostButtons}
                     </div>
                 </div>
                 <h3>Details</h3>
