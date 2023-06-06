@@ -20,11 +20,12 @@ export default function UpdateGroup() {
     const [type, setType] = useState(group.type ?? '');
     const [privateBoolean, setPrivateBoolean] = useState(group.private ?? '');
     const [validationErors, setValidationErrors] = useState({});
-    //const [imgURL, setImgURL] = useState('');
+    const [imgURL, setImgURL] = useState('');
 
     useEffect(() => {
         (async () => {
             const group = await dispatch(getGroupByIdThunk(groupId));
+            //console.log('update grou', group)
 
             setCity(group.city);
             setState(group.state);
@@ -32,6 +33,10 @@ export default function UpdateGroup() {
             setAbout(group.about);
             setType(group.type);
             setPrivateBoolean(group.private);
+
+            const img = group.GroupImages?.find(group => group.preview === true);
+            //console.log(img)
+            setImgURL(img?.url ?? '');
         })();
 
     }, [dispatch, groupId]);
@@ -48,7 +53,9 @@ export default function UpdateGroup() {
         if(about.length < 50) errors.about = "About must be 50 charectors or more";
         if(privateBoolean === '') errors.privateBoolean = "private or public is required";
         if(!type) errors.type = "Type is required";
-
+        if(!imgURL) errors.imgURL = "Img URL is required";
+        console.log(imgURL)
+        if(!imgURL.endsWith('.png') && !imgURL.endsWith('.jpg') && !imgURL.endsWith('.jpeg')) errors.imgURL = "Image URL must end in .png, .jpg or .jpeg";
 
         if(Object.values(errors).length) {
             setValidationErrors(errors);
@@ -64,16 +71,16 @@ export default function UpdateGroup() {
             state
         }
 
-        console.log(payload)
+        //console.log(payload)
 
         let group;
         try{
-            group = await dispatch(updateGroupThunk(payload, groupId));
+            group = await dispatch(updateGroupThunk(payload, groupId, imgURL));
 
             history.push(`/groups/${group.id}`)
         } catch(e) {
             setValidationErrors(e);
-            console.log(validationErors)
+            console.log(e)
         }
     }
 
@@ -214,7 +221,12 @@ export default function UpdateGroup() {
                 </label>
                 <label>
                     <p>Please add an image url for your group below</p>
-                    <input placeholder="image URL"/>
+                    <input
+                        value={imgURL}
+                        onChange={(e) => setImgURL(e.target.value)}
+                        placeholder="image URL"
+                    />
+                    <p className='errors-group-create'>{validationErors.imgURL}</p>
                 </label>
                 <button type="submit">Update group</button>
             </form>

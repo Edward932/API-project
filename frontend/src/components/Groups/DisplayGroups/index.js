@@ -8,7 +8,7 @@ export default function DisplayGroups() {
     const dispatch = useDispatch();
     const groupsObj = useSelector(state => state.groups.allGroups);
     const groupsArr = Object.values(groupsObj ?? {});
-    console.log('groups in DisplayGroups component', groupsArr);
+    //console.log('groups in DisplayGroups component', groupsArr);
 
     useEffect(() => {
         dispatch(getGroupsThunk())
