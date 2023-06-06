@@ -71,7 +71,7 @@ export default function UpdateGroup() {
             state
         }
 
-        console.log(payload)
+        //console.log(payload)
 
         let group;
         try{
@@ -80,7 +80,7 @@ export default function UpdateGroup() {
             history.push(`/groups/${group.id}`)
         } catch(e) {
             setValidationErrors(e);
-            console.log(validationErors)
+            console.log(e)
         }
     }
 

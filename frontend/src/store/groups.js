@@ -120,9 +120,25 @@ export const addImgURLThunk = (groupId, imgURL) => async dispatch => {
     }
 };
 
-export const updateIMGThunk = () => async dispatch => {
+export const updateIMGThunk = (oldImgId, groupId, newImgURL) => async dispatch => {
+    console.log(oldImgId, 'oldImgId');
+    console.log('groupId', groupId);
+    console.log('newImgURl', newImgURL);
+    let res;
+    if(oldImgId){
+        res = await csrfFetch(`/api/group-images/${oldImgId}`, {
+            method: 'DELETE'
+        });
+    }
 
-}
+    if(res.ok) {
+        dispatch(addImgURLThunk(groupId, newImgURL));
+    } else {
+        const error = await res.json();
+        console.log('delteimg fail', error)
+        return error;
+    }
+};
 
 export const deleteGroupThunk = (groupId) => async dispatch => {
     const res = await csrfFetch(`/api/groups/${groupId}`, {
@@ -146,14 +162,20 @@ export const updateGroupThunk = (group, groupId, imgURL) => async dispatch => {
         body: JSON.stringify(group)
     });
 
+    console.log('first update before img');
+
     if(res.ok) {
-        const group = await res.json();
-        await dispatch(addImgURLThunk(group.id, imgURL));
+        const group = await dispatch(getGroupByIdThunk(groupId));
+        const oldImgURL = group.GroupImages?.find(image => image.preview === true);
+
+        console.log('in update thunk', group);
+        await dispatch(updateIMGThunk(oldImgURL.id, group.id, imgURL));
 
         dispatch(updateGroup(group));
         return group;
     } else {
         const error = res.json();
+        console.log('ERRROEROE')
         return error;
     }
 };
