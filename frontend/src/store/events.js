@@ -22,17 +22,12 @@ export const getEventsByGroupThunk = groupId => async dispatch => {
     }
 }
 
-const initialState = { allEvents: {}, singleEvent: {}, groupEvents: {} };
+const initialState = { allEvents: {}, singleEvent: {}, groupEvents: [] };
 
 const eventReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_EVENTS_BY_GROUP:
-            // console.log(action.events)
-            const newGroupEvents = {};
-            action.events.Events.forEach(event => {
-                newGroupEvents[event.id] = event
-            })
-            return { ...state, groupEvents: newGroupEvents };
+            return { ...state, groupEvents: action.events.Events };
         default:
             return state;
     }

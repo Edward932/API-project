@@ -7,10 +7,11 @@ import { Link } from 'react-router-dom';
 export default function GroupEvents({ groupId }) {
     const dispatch = useDispatch();
 
-    const events = useSelector(state => state.events.groupEvents);
+    const eventsArr = useSelector(state => state.events.groupEvents);
     const upComingEvents = [];
     const pastEvents = [];
-    const eventsArr = Object.values(events);
+    console.log('events', eventsArr);
+    //const eventsArr = Object.values(events);
 
     const now = new Date();
     eventsArr.forEach(event => {
@@ -23,7 +24,6 @@ export default function GroupEvents({ groupId }) {
         dispatch(getEventsByGroupThunk(groupId))
     }, [dispatch, groupId]);
 
-    //console.log(upComingEvents);
 
     let upComingDiv;
     if(upComingEvents.length) {

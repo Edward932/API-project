@@ -248,7 +248,8 @@ router.get('/:groupId/events', async(req, res, next) => {
         where: {
             groupId: req.params.groupId
         },
-        attributes: ['id', 'groupId', 'venueId', 'name', 'description', 'type', 'startDate', 'endDate']
+        attributes: ['id', 'groupId', 'venueId', 'name', 'description', 'type', 'startDate', 'endDate'],
+        order: [['startDate']]
     });
 
     for(let i = 0; i < events.length; i++) {
