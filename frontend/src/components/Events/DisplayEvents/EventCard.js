@@ -21,7 +21,7 @@ export default function GroupCard({ event }) {
     return (
         <Link to={`/events/${event.id}`} key={event.id} className="event-link">
             <div className="upper-event-card">
-                <img src={event.previewImage} alt="event" className="event-img"/>
+                {event.previewImage === "No preview image for event" ? "No preview image for event" : <img src={event.previewImage} alt="event" className="event-img"/>}
                 <div>
                     <p className="event-time">{date} <i className="fa-solid fa-circle"></i> {normalizedFor12}</p>
                     <h3>{event.name}</h3>

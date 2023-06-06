@@ -1,7 +1,9 @@
-// import { csrfFetch } from "./csrf";
+import { csrfFetch } from "./csrf";
 
 const GET_EVENTS_BY_GROUP = 'events/getEventsByGroup';
 const GET_EVENTS = 'events/getEvents';
+const GET_EVENT_BY_ID = 'events/getEventById';
+const DELETE_EVENT = 'events/delteEvent';
 
 const getEventsByGroup = events => {
     return {
@@ -16,6 +18,20 @@ const getEvents = (events) => {
         events
     }
 };
+
+const getEventById = (event) => {
+    return {
+        type: GET_EVENT_BY_ID,
+        event
+    }
+};
+
+const deleteEvent = (eventId) => {
+    return {
+        type: DELETE_EVENT,
+        eventId
+    }
+}
 
 export const getEventsByGroupThunk = groupId => async dispatch => {
     const res = await fetch(`/api/groups/${groupId}/events`);
@@ -41,6 +57,35 @@ export const getEventsThunk = () => async dispatch => {
         const error = await res.json();
         return error;
     }
+};
+
+export const getEventByIdThunk = eventId => async dispatch => {
+    const res = await fetch(`/api/events/${eventId}`);
+
+    if(res.ok) {
+        const event = await res.json();
+        dispatch(getEventById(event));
+        return event;
+    } else {
+        const error = await res.json();
+        return error;
+    }
+};
+
+export const deleteEventThunk = eventId => async dispatch => {
+    console.log(eventId);
+    const res = await csrfFetch(`/api/events/${eventId}`, {
+        method: 'DELETE'
+    });
+
+    if(res.ok) {
+        const message = await res.json();
+        dispatch(deleteEvent(eventId));
+        return message;
+    } else {
+        const error = await res.json();
+        return error;
+    }
 }
 
 const initialState = { allEvents: {}, singleEvent: {}, groupEvents: [] };
@@ -50,13 +95,18 @@ const eventReducer = (state = initialState, action) => {
         case GET_EVENTS_BY_GROUP:
             return { ...state, groupEvents: action.events.Events };
         case GET_EVENTS:
-            console.log("IN REDUCER")
             const normalizedEvents = {};
             const eventArr = action.events.Events;
             eventArr.forEach(event => {
                 normalizedEvents[event.id] = event;
             });
-            return { ...state, allEvents: normalizedEvents }
+            return { ...state, allEvents: normalizedEvents };
+        case GET_EVENT_BY_ID:
+            return { ...state, singleEvent: action.event};
+        case DELETE_EVENT:
+            const newAllEvents = { ...state.allEvents};
+            delete newAllEvents[action.eventId];
+            return { ...state, allEvents: newAllEvents, singleEvent: {} }
         default:
             return state;
     }
