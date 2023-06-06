@@ -135,9 +135,11 @@ const groupsReducer = (state = initialState, action) => {
         case DELETE_GROUP:
             const newAllGroups = { ...state.allGroups };
             delete newAllGroups[action.groupId];
-            return { ...state, allGroup: newAllGroups, singleGroup: {} };
+            return { ...state, allGroups: newAllGroups, singleGroup: {} };
         case UPDATE_GROUP:
-            return state;
+            const updateAllGroups = { ...state.allGroups };
+            updateAllGroups[action.groupId] = action.group;
+            return { ...state, allGroups: updateAllGroups, singleGroup: action.group };
         default:
             return state;
     }
