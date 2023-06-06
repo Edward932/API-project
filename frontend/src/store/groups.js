@@ -6,7 +6,7 @@ const CREATE_GROUP = 'groups/createGroup';
 const DELETE_GROUP = 'groups/deleteGroup';
 const UPDATE_GROUP = 'groups/updateGroup';
 const ADD_IMG = 'groups/addImgURL';
-const UPDATE_IMG = 'groupt/updateIMG'
+// const UPDATE_IMG = 'groupt/updateIMG'
 
 const getGroups = (groups) => {
     return {
@@ -51,11 +51,11 @@ const updateGroup = (group) => {
     }
 };
 
-const updateIMG = () => {
-    return {
-        type: UPDATE_IMG
-    }
-}
+// const updateIMG = () => {
+//     return {
+//         type: UPDATE_IMG
+//     }
+// }
 
 export const getGroupsThunk = () => async dispatch => {
     const res = await fetch('/api/groups');
