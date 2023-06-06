@@ -1,0 +1,51 @@
+.event-page-div {
+    display: flex;
+    flex-direction: column;
+}
+
+#event-main-div {
+    display: flex;
+    border: 2px solid blue;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+#event-preview-img {
+    width: 400px;
+    height: 300px;
+}
+
+#event-time {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    margin: 10px 10px 10px 0px;
+}
+
+#event-start-end {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#event-start-end p{
+    margin: 0;
+}
+
+#event-group-display {
+    border: 2px solid orange;
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.event-money-type {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+#event-group-small {
+    height: 100px;
+    width: 100px;
+}

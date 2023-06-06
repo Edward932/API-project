@@ -110,3 +110,9 @@
     margin-top: 3px;
     margin-bottom: 20px;
 }
+
+.event-times {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
