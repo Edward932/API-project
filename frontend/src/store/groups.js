@@ -102,7 +102,7 @@ export const deleteGroupThunk = (groupId) => async dispatch => {
 
 export const updateGroupThunk = (group, groupId) => async dispatch => {
     const res = await csrfFetch(`/api/groups/${groupId}`, {
-        method: 'POST',
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(group)
     });
@@ -115,7 +115,7 @@ export const updateGroupThunk = (group, groupId) => async dispatch => {
         const error = res.json();
         return error;
     }
-}
+};
 
 const initialState = { allGroups: {}, singleGroup: {} };
 
@@ -133,7 +133,9 @@ const groupsReducer = (state = initialState, action) => {
         case CREATE_GROUP:
             return { ...state, singleGroup: action.group};
         case DELETE_GROUP:
-            return state;
+            const newAllGroups = { ...state.allGroups };
+            delete newAllGroups[action.groupId];
+            return { ...state, allGroup: newAllGroups, singleGroup: {} };
         case UPDATE_GROUP:
             return state;
         default:

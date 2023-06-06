@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory,useParams } from 'react-router-dom';
-//import { updateGroupThunk } from '../../../store/groups';
+import { updateGroupThunk } from '../../../store/groups';
 import './UpdateGroup.css'
 import { getGroupByIdThunk } from '../../../store/groups';
 
@@ -49,6 +49,7 @@ export default function UpdateGroup() {
         if(privateBoolean === '') errors.privateBoolean = "private or public is required";
         if(!type) errors.type = "Type is required";
 
+
         if(Object.values(errors).length) {
             setValidationErrors(errors);
             return;
@@ -65,15 +66,15 @@ export default function UpdateGroup() {
 
         console.log(payload)
 
-        // let group;
-        // try{
-        //     group = await dispatch(updateGroupThunk(payload));
+        let group;
+        try{
+            group = await dispatch(updateGroupThunk(payload, groupId));
 
-        //     history.push(`/groups/${group.id}`)
-        // } catch(e) {
-        //     setValidationErrors(e);
-        //     console.log(validationErors)
-        // }
+            history.push(`/groups/${group.id}`)
+        } catch(e) {
+            setValidationErrors(e);
+            console.log(validationErors)
+        }
     }
 
     if(!user || group.organizerId === null || (group.organizerId && group.organizerId !== user.id)) {
@@ -215,7 +216,7 @@ export default function UpdateGroup() {
                     <p>Please add an image url for your group below</p>
                     <input placeholder="image URL"/>
                 </label>
-                <button type="submit">Create group</button>
+                <button type="submit">Update group</button>
             </form>
         </div>
     )
