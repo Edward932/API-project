@@ -1,22 +1,41 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { createGroupThunk } from '../../../store/groups';
-import './CreateGroup.css'
+import { useHistory,useParams } from 'react-router-dom';
+import { updateGroupThunk } from '../../../store/groups';
+import './UpdateGroup.css'
+import { getGroupByIdThunk } from '../../../store/groups';
 
-export default function CreateGroup() {
+export default function UpdateGroup() {
     const dispatch = useDispatch();
+    const { groupId } = useParams();
+
     const history = useHistory();
     const user = useSelector(state => state.session.user);
+    const group = useSelector(state => state.groups.singleGroup);
 
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [name, setName] = useState('');
-    const [about, setAbout] = useState('');
-    const [type, setType] = useState('');
-    const [privateBoolean, setPrivateBoolean] = useState('');
+    const [city, setCity] = useState(group.city ?? '');
+    const [state, setState] = useState(group.state ?? '');
+    const [name, setName] = useState(group.name ?? '');
+    const [about, setAbout] = useState(group.about ?? '');
+    const [type, setType] = useState(group.type ?? '');
+    const [privateBoolean, setPrivateBoolean] = useState(group.private ?? '');
     const [validationErors, setValidationErrors] = useState({});
     //const [imgURL, setImgURL] = useState('');
+
+    useEffect(() => {
+        (async () => {
+            const group = await dispatch(getGroupByIdThunk(groupId));
+
+            setCity(group.city);
+            setState(group.state);
+            setName(group.name);
+            setAbout(group.about);
+            setType(group.type);
+            setPrivateBoolean(group.private);
+        })();
+
+    }, [dispatch, groupId]);
+
 
 
     const handleSubmit = async e => {
@@ -29,6 +48,7 @@ export default function CreateGroup() {
         if(about.length < 50) errors.about = "About must be 50 charectors or more";
         if(privateBoolean === '') errors.privateBoolean = "private or public is required";
         if(!type) errors.type = "Type is required";
+
 
         if(Object.values(errors).length) {
             setValidationErrors(errors);
@@ -44,9 +64,11 @@ export default function CreateGroup() {
             state
         }
 
+        console.log(payload)
+
         let group;
         try{
-            group = await dispatch(createGroupThunk(payload));
+            group = await dispatch(updateGroupThunk(payload, groupId));
 
             history.push(`/groups/${group.id}`)
         } catch(e) {
@@ -55,12 +77,12 @@ export default function CreateGroup() {
         }
     }
 
-    if(!user) {
+    if(!user || group.organizerId === null || (group.organizerId && group.organizerId !== user.id)) {
         setTimeout(() => history.push('/'), 5000);
 
         return (
             <div>
-                <h1>Login in to create group</h1>
+                <h1>Must be organizer to update group</h1>
                 <h3>Redirecting to home page in 5 seconds</h3>
             </div>
         );
@@ -194,7 +216,7 @@ export default function CreateGroup() {
                     <p>Please add an image url for your group below</p>
                     <input placeholder="image URL"/>
                 </label>
-                <button type="submit">Create group</button>
+                <button type="submit">Update group</button>
             </form>
         </div>
     )
