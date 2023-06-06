@@ -38,7 +38,7 @@ export default function GroupPage() {
         organizerButtons = (
             <div id="organizer-buttons">
                 (NOT READY YET)
-                <button>Create Event</button>
+                <Link to={`/groups/${groupId}/new-event`}><button>Create Event</button></Link>
                 <Link to={`/groups/${groupId}/update`}><button>Update</button></Link>
                 <OpenModalButton
                     buttonText="Delete"
