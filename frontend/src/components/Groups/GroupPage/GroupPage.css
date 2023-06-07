@@ -1,4 +1,7 @@
 #group-events-display {
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-top: 20px;
     background-color: lightgray;
 }
 
@@ -22,10 +25,9 @@
 }
 
 #group-preview-img {
-    max-width: 95%;
-    height: auto;
-    max-height: 95%;
-    align-self: center;
+    width: 95%;
+    height: 95%;
+    object-fit: contain;
 }
 
 #group-info {
@@ -69,6 +71,7 @@
     display: flex;
     align-items: center;
     column-gap: 5px;
+    color: rgb(46, 70, 166)
 }
 
 .upper-event-card {
@@ -84,6 +87,8 @@
     background-color: white;
     width: 700px;
     border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 #delete-button {
@@ -151,4 +156,20 @@
 
 #group-organizer {
     margin-top: 0;
+}
+
+#group-events-display h3 {
+    font-weight: 525;
+    font-size: 22px;
+}
+
+#group-event-location {
+    color: grey
+}
+
+#group-event-discritpion {
+    -webkit-line-clamp: 5;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
