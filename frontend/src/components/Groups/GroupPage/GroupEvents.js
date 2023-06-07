@@ -49,11 +49,11 @@ export default function GroupEvents({ groupId }) {
                                 <img src={event.previewImage} alt="event" className="group-event-img"/>
                                 <div>
                                     <p className="group-event-time">{date} <i className="fa-solid fa-circle"></i> {normalizedFor12}</p>
-                                    <h3>{event.name}</h3>
-                                    <p>{event.venue && `${event.venue.city}, ${event.venue.state}`}</p>
+                                    <h3 className="event-group-title">{event.name}</h3>
+                                    <p id="group-event-location">{event.venue && `${event.venue.city}, ${event.venue.state}`}</p>
                                 </div>
                             </div>
-                            <p>{event.description}</p>
+                            <p id="group-event-discritpion">{event.description}</p>
                         </Link>
                     );
                 })}

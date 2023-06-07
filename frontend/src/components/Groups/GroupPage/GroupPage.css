@@ -1,23 +1,33 @@
 #group-events-display {
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-top: 20px;
     background-color: lightgray;
 }
 
 #group-display {
-    display: flex;
+    height: 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#group-display div {
+    max-height: 400px;
 }
 
 .group-img-div-large {
-    width: 60%;
-    height: 400px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-between;
     margin-right: 20px;
 }
 
 #group-preview-img {
-    height: auto;
-    width: 100%;
+    width: 95%;
+    height: 95%;
+    object-fit: contain;
 }
 
 #group-info {
@@ -27,17 +37,19 @@
 }
 
 #join-group {
-    background-color: red;
+    background-color: darkred;
     color: white;
     box-shadow: 2px 2px black;
     height: 50px;
     font-size: 20px;
+    width: 250px;
+    cursor: pointer;
 }
 
 #organizer-buttons {
     display: flex;
-    flex-direction: column;
-    row-gap: 5px;
+    flex-direction: row;
+    column-gap: 10px;
 }
 
 #organizer-buttons button{
@@ -46,6 +58,8 @@
     box-shadow: 2px 2px black;
     height: 30px;
     font-size: 15px;
+    width: 150px;
+    cursor: pointer;
 }
 
 .group-event-img {
@@ -57,6 +71,7 @@
     display: flex;
     align-items: center;
     column-gap: 5px;
+    color: rgb(46, 70, 166)
 }
 
 .upper-event-card {
@@ -72,6 +87,8 @@
     background-color: white;
     width: 700px;
     border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 #delete-button {
@@ -115,4 +132,44 @@
     display: flex;
     align-items: center;
     column-gap: 5px;
+}
+
+#group-name {
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.num-private-group {
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+    margin-top: 0;
+}
+
+#group-info-smaller {
+    color: grey
+}
+
+#group-location {
+    margin-bottom: 0;
+}
+
+#group-organizer {
+    margin-top: 0;
+}
+
+#group-events-display h3 {
+    font-weight: 525;
+    font-size: 22px;
+}
+
+#group-event-location {
+    color: grey
+}
+
+#group-event-discritpion {
+    -webkit-line-clamp: 5;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
