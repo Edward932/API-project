@@ -15,5 +15,5 @@ Link {
 
 .selected {
     text-decoration: underline;
-    color: red;
+    color: rgb(0 121 138);
 }

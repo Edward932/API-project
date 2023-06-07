@@ -63,6 +63,7 @@
     align-items: center;
     justify-content: center;
     align-self: center;
+    max-width: 400px;
 }
 
 #mid-div h3 {
@@ -113,4 +114,12 @@
 
 #button-div-bottom {
     margin-bottom: 20px;
+}
+
+#lower-div {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 15px;
 }
