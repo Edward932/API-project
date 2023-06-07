@@ -73,12 +73,13 @@ export default function CreateEvent() {
     }, [dispatch, groupId]);
 
     return (
-        <div>
-            <h1>Create a new event for {group?.name}</h1>
+        <div id="create-event-div">
+            <h1 id="event-form-title">Create a new event for {group?.name}</h1>
             <form onSubmit={handleSubmit}>
                 <label>
                     <p>What is the namae of your event</p>
                     <input
+                        className="wide-label"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Event Name"
@@ -86,7 +87,7 @@ export default function CreateEvent() {
                     <p className="validation-errors">{validationErors.name}</p>
                 </label>
                 <label>
-                    <p>Is this an in person or an online event?</p>
+                    <p className="grey-bar-event">Is this an in person or an online event?</p>
                     <select
                         value={type}
                         onChange={(e) => setType(e.target.value)}
@@ -120,7 +121,7 @@ export default function CreateEvent() {
                     <p className="validation-errors">{validationErors.price}</p>
                 </label>
                 <label>
-                    <p>When does your event start?</p>
+                    <p className="grey-bar-event">When does your event start?</p>
                     <input
                         type="datetime-local"
                         value={startDate}
@@ -138,15 +139,16 @@ export default function CreateEvent() {
                     <p className="validation-errors">{validationErors.endDate}</p>
                 </label>
                 <label>
-                    <p>Please add an image url for your event below</p>
+                    <p className="grey-bar-event">Please add an image url for your event below</p>
                     <input
+                        className="wide-label"
                         placeholder="Image URL"
                         value={imgUrl}
                         onChange={(e) => setImgUrl(e.target.value)}
                     />
                     <p className="validation-errors">{validationErors.imgUrl}</p>
                 </label>
-                <label>
+                <label className="grey-bar-event">
                     <p>Please describe your event</p>
                     <textarea
                         placeholder="Please provide at least 30 charecters"
@@ -155,7 +157,7 @@ export default function CreateEvent() {
                     />
                     <p className="validation-errors">{validationErors.description}</p>
                 </label>
-                <button>Create Event</button>
+                <button id="event-form-button">Create Event</button>
             </form>
         </div>
     )
