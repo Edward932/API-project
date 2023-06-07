@@ -1,14 +1,17 @@
 .group-card {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
     border-top: solid 2px lightgray;
-    /* cursor: pointer; */
+    padding-top: 10px;
+    padding-bottom: 10px;
     text-decoration: none;
     color: black
 }
 
 .group-img {
-    width: 250px;
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 15px;
 }
 
 .group-img-div {
@@ -16,14 +19,45 @@
     align-items: center;
     justify-content: center;
     margin-right: 20px;
+    height: 200px;
+    width: 300px;
 }
 
 .num-private {
     display: flex;
     align-items: center;
-    grid-gap: 10px
+    grid-gap: 10px;
+    font-size: 18px;
+    color: grey;
 }
 
 .fa-circle {
     font-size: 5px;
+}
+
+.groups-titles {
+    font-weight: 500;
+    font-size: 30px;
+    margin-bottom: 0;
+}
+
+.groups-location {
+    color: grey;
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.groups-about {
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.lower-groups-display {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    overflow: hidden;
 }

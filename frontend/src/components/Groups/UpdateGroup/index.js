@@ -35,7 +35,6 @@ export default function UpdateGroup() {
             setPrivateBoolean(group.private);
 
             const img = group.GroupImages?.find(group => group.preview === true);
-            //console.log(img)
             setImgURL(img?.url ?? '');
         })();
 

@@ -1,13 +1,17 @@
-import { useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { createEventThunk } from "../../../store/events";
 import './CreateEvent.css'
+import { getGroupByIdThunk } from "../../../store/groups";
 
 export default function CreateEvent() {
     const dispatch = useDispatch();
     const history = useHistory();
     const { groupId } = useParams();
+    const group = useSelector(state => state.groups.singleGroup);
+    console.log(group)
+
 
     const [name, setName] = useState('');
     const [type, setType] = useState('');
@@ -30,6 +34,9 @@ export default function CreateEvent() {
         // what to do about price ?
         if(!startDate) errors.startDate = "Start date is required";
         if(!endDate) errors.endDate = "End date is required";
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        if(start > end) errors.endDate = "End date must be after start date";
         if(!imgUrl) errors.imgUrl = "Image URL is requried";
         if(imgUrl && !imgUrl.endsWith('.png') && !imgUrl.endsWith('.jpg') && !imgUrl.endsWith('.jpeg')) errors.imgUrl = "Image URL must end in .png, .jpg or .jpeg";
         if(description.length < 30) errors.description = "Description must be at least 30 charecters";
@@ -39,7 +46,6 @@ export default function CreateEvent() {
             return;
         }
 
-        // make payload
         const payload = {
             name,
             type,
@@ -56,17 +62,19 @@ export default function CreateEvent() {
 
             history.push(`/events/${event.id}`);
         } catch(e) {
-            setValidationErrors(e);
-            console.log(e);
+            const data = await e.json();
+            setValidationErrors(data.errors);
+            console.log(data);
         }
+    };
 
-
-        // try catch group dispatch
-    }
+    useEffect(() => {
+        dispatch(getGroupByIdThunk(groupId));
+    }, [dispatch, groupId]);
 
     return (
         <div>
-            <h1>Create a new event for (GROUP NAME)</h1>
+            <h1>Create a new event for {group?.name}</h1>
             <form onSubmit={handleSubmit}>
                 <label>
                     <p>What is the namae of your event</p>
