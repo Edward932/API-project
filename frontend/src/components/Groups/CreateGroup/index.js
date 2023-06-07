@@ -69,8 +69,8 @@ export default function CreateGroup() {
 
 
     return (
-        <div>
-            <h1>Start a new group</h1>
+        <div id="group-form-div">
+            <h1 id="group-form-title">Start a new group</h1>
             <form onSubmit={handleSubmit}>
                 <label>
                     <h3>Set your group's location.</h3>
@@ -200,7 +200,7 @@ export default function CreateGroup() {
                     />
                     <p className='errors-group-create'>{validationErors.imgURL}</p>
                 </label>
-                <button type="submit">Create group</button>
+                <button id="group-form-button" type="submit">Create group</button>
             </form>
         </div>
     )
