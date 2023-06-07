@@ -44,10 +44,10 @@ function ProfileButton({ user }) {
 
   return (
     <div id="nav-bar-outer">
-      {user && <Link to="/groups/new" className="new-groups-link">Start a new group</Link>}
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+      <div id="profile-inner">
+        {user && <Link to="/groups/new" className="new-groups-link">Start a new group</Link>}
+        <i onClick={openMenu} class="fa-solid fa-circle-user"></i>
+      </div>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <div className="user-info">
