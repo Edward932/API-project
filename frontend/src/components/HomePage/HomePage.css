@@ -97,10 +97,12 @@
 #join-meetup {
     background-color: rgb(0 121 138);
     color: white;
-    width: 200px;
+    width: 220px;
     height: 50px;
     font-size: 20px;
     box-shadow: 2px 2px 2px grey;
+    border: none;
+    border-radius: 15px;
 }
 
 #mid-div p {
@@ -122,4 +124,14 @@
     flex-direction: column;
     justify-content: space-between;
     row-gap: 15px;
+}
+
+.bg-image {
+    position: absolute;
+    opacity: 0.08;
+    z-index: -100;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
 }
