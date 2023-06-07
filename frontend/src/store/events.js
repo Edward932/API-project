@@ -4,6 +4,8 @@ const GET_EVENTS_BY_GROUP = 'events/getEventsByGroup';
 const GET_EVENTS = 'events/getEvents';
 const GET_EVENT_BY_ID = 'events/getEventById';
 const DELETE_EVENT = 'events/delteEvent';
+const CREATE_EVENT = 'events/createEvent';
+const CREATE_IMAGE = 'events/createImage'
 
 const getEventsByGroup = events => {
     return {
@@ -31,7 +33,18 @@ const deleteEvent = (eventId) => {
         type: DELETE_EVENT,
         eventId
     }
-}
+};
+
+const createEvent = (event) => {
+    return {
+        type: CREATE_EVENT,
+        event
+    }
+};
+
+// const createImage = (image) => {
+
+// }
 
 export const getEventsByGroupThunk = groupId => async dispatch => {
     const res = await fetch(`/api/groups/${groupId}/events`);
@@ -73,7 +86,7 @@ export const getEventByIdThunk = eventId => async dispatch => {
 };
 
 export const deleteEventThunk = eventId => async dispatch => {
-    console.log(eventId);
+    //console.log(eventId);
     const res = await csrfFetch(`/api/events/${eventId}`, {
         method: 'DELETE'
     });
@@ -86,7 +99,46 @@ export const deleteEventThunk = eventId => async dispatch => {
         const error = await res.json();
         return error;
     }
-}
+};
+
+const createImageThunk = (eventId, imgURL) => async dispatch => {
+    const res = await csrfFetch(`/api/events/${eventId}/images`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            url: imgURL,
+            preview: true
+        })
+    });
+
+    if(res.ok) {
+        const img = await res.json();
+        // add dispatch
+        return img;
+    } else {
+        const error = await res.json();
+        return error;
+    }
+};
+
+export const createEventThunk = (event, groupId, imageURL) => async dispatch => {
+    const res = await csrfFetch(`/api/groups/${groupId}/events`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(event)
+    });
+
+    if(res.ok) {
+        const event = await res.json();
+
+        const img = await dispatch(createImageThunk(event.id, imageURL));
+        dispatch(createEvent(event));
+        return event;
+    } else {
+        const error = await res.json();
+        return error;
+    }
+};
 
 const initialState = { allEvents: {}, singleEvent: {}, groupEvents: [] };
 
@@ -106,7 +158,9 @@ const eventReducer = (state = initialState, action) => {
         case DELETE_EVENT:
             const newAllEvents = { ...state.allEvents};
             delete newAllEvents[action.eventId];
-            return { ...state, allEvents: newAllEvents, singleEvent: {} }
+            return { ...state, allEvents: newAllEvents, singleEvent: {} };
+        case CREATE_EVENT:
+            return { ...state, allEvents: {}, singleEvent: action.event }
         default:
             return state;
     }
