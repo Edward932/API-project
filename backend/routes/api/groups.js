@@ -289,12 +289,13 @@ router.post('/:groupId/events', requireAuth, isOrganizerOrCohost, async(req, res
     let { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
 
     //just for front end MVP
-    venueId = 1;
     capacity = 20;
+
 
     let event;
     try {
-        const venue = await Venue.findByPk(venueId);
+        // change to find by PK when you have a venueId
+        const venue = await Venue.findOne();
 
         event = await Event.create({
             groupId: parseInt(req.params.groupId),
