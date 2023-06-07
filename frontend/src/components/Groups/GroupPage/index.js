@@ -37,7 +37,6 @@ export default function GroupPage() {
     if(user && user.id === group.Organizer?.id) {
         organizerButtons = (
             <div id="organizer-buttons">
-                (NOT READY YET)
                 <Link to={`/groups/${groupId}/new-event`}><button>Create Event</button></Link>
                 <Link to={`/groups/${groupId}/update`}><button>Update</button></Link>
                 <OpenModalButton
