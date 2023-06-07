@@ -1,4 +1,6 @@
 /* TODO Add site wide styles */
 #root {
     padding: 0 20px;
+    overflow:hidden;
+    font-family: "Gill Sans", sans-serif;
 }

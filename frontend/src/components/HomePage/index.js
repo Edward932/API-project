@@ -16,8 +16,8 @@ export default function HomePage() {
                     </h1>
                     <p>Whatever your interest, from hiking and reading to networking and skill sharing, there are thousands of people who share it on Meetup. Events are happening every day—sign up to join the fun.</p>
                 </div>
-                <div>
-                    <img id="main-img" src="https://www.meetup.com/blog/wp-content/uploads/2020/08/holding-hands.jpg" alt="holding hands" />
+                <div id="main-img-div">
+                    <img id="main-img" src="https://secure.meetupstatic.com/next/images/shared/online_events.svg?w=640" alt="holding hands" />
                 </div>
             </div>
             <div id="mid-div">
@@ -26,23 +26,23 @@ export default function HomePage() {
             </div>
             <div id="bottom-links">
                 <div className='link-cards'>
-                    <img className="sub-imgs" src="https://www.meetup.com/blog/wp-content/uploads/2020/08/holding-hands.jpg" alt="carton computer" />
-                    <Link to="/groups">See all goups</Link>
+                    <img className="sub-imgs" src="https://secure.meetupstatic.com/next/images/shared/handsUp.svg?w=256" alt="carton computer" />
+                    <Link className="link-homepage" to="/groups">See all goups</Link>
                     <p>Do what you love, meet others who love it, find your community. The rest is history!</p>
                 </div>
                 <div className='link-cards'>
-                    <img className="sub-imgs" src="https://www.meetup.com/blog/wp-content/uploads/2020/08/holding-hands.jpg" alt="carton computer" />
-                    <Link to="/events">Find an event</Link>
+                    <img className="sub-imgs" src="https://secure.meetupstatic.com/next/images/shared/ticket.svg?w=256" alt="carton computer" />
+                    <Link className="link-homepage" to="/events">Find an event</Link>
                     <p>Events are happening on just about any topic you can think of, from online gaming and photography to yoga and hiking.</p>
                 </div>
                 <div className='link-cards'>
-                    <img className="sub-imgs"src="https://www.meetup.com/blog/wp-content/uploads/2020/08/holding-hands.jpg" alt="carton computer" />
-                    <Link to="/groups/new" className={user ? "" : "disabled-link"}>Start a new group</Link>
+                    <img className="sub-imgs"src="https://secure.meetupstatic.com/next/images/shared/joinGroup.svg?w=256" alt="carton computer" />
+                    <Link to="/groups/new" className={user ? "link-homepage" : "disabled-link"}>Start a new group</Link>
                     <p>You don’t have to be an expert to gather people together and explore shared interests.</p>
                 </div>
             </div>
             <div id="button-div-bottom">
-                <button>Join Meetup</button>
+                <button id='join-meetup'>Join Meetup</button>
             </div>
         </div>
     )

@@ -7,16 +7,19 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/"><img id="home-button" src="https://www.meetup.com/mu_static/en-US/logo--script.257d0bb1.svg" alt="meetup-logo"/></NavLink>
-      </li>
-      {isLoaded && (
+    <div id="nav-div">
+      <ul id="nav-bar">
         <li>
-          <ProfileButton user={sessionUser} />
+          <NavLink exact to="/"><img id="home-button" src="https://www.meetup.com/mu_static/en-US/logo--script.257d0bb1.svg" alt="meetup-logo"/></NavLink>
         </li>
-      )}
-    </ul>
+        {isLoaded && (
+          <li>
+            <ProfileButton user={sessionUser} />
+          </li>
+        )}
+      </ul>
+      <hr id="nav-bar-hr"/>
+    </div>
   );
 }
 
