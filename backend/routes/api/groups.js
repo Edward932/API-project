@@ -286,7 +286,11 @@ router.get('/:groupId/events', async(req, res, next) => {
 
 //crate an event for a group --- auth orginazer or co-host
 router.post('/:groupId/events', requireAuth, isOrganizerOrCohost, async(req, res, next) => {
-    const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
+    let { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
+
+    //just for front end MVP
+    venueId = 1;
+    capacity = 20;
 
     let event;
     try {

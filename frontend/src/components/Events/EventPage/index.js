@@ -89,8 +89,8 @@ export default function EventPage() {
                         <div id='event-group-display'>
                             {groupPreviewUrl ? <img src={groupPreviewUrl} id="event-group-small" alt="group"/> : <p id="event-group-small">No preview image available</p>}
                             <div>
-                                <h4>{event.Group.name}</h4>
-                                <p>{event.Group.private ? 'Private' : 'Public'}</p>
+                                <h4>{event.Group?.name}</h4>
+                                <p>{event.Group?.private ? 'Private' : 'Public'}</p>
                             </div>
                         </div>
                         <div>
