@@ -43,7 +43,7 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <div>
+    <div id="nav-bar-outer">
       {user && <Link to="/groups/new" className="new-groups-link">Start a new group</Link>}
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />

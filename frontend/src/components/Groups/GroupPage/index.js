@@ -60,14 +60,16 @@ export default function GroupPage() {
                     </div>
                     <div id="group-info">
                         <div>
-                            <h3>{group.name}</h3>
-                            <p>{group.city}, {group.state}</p>
-                            <div className="num-private">
-                                <p>{group.numMembers} members</p>
-                                <i className="fa-solid fa-circle"></i>
-                                <p>{group.private ? 'Private' : 'Public'}</p>
+                            <h3 id="group-name">{group.name}</h3>
+                            <div id="group-info-smaller">
+                                <p id="group-location">{group.city}, {group.state}</p>
+                                <div className="num-private-group">
+                                    <p>{group.numMembers} members</p>
+                                    <i className="fa-solid fa-circle"></i>
+                                    <p>{group.private ? 'Private' : 'Public'}</p>
+                                </div>
+                                {group.Organizer ? <p id="group-organizer">Organized by {group.Organizer.firstName} {group.Organizer.lastName}</p> : <p id="group-organizer">No group organizer</p>}
                             </div>
-                            {group.Organizer ? <p>Organized by {group.Organizer.firstName} {group.Organizer.lastName}</p> : "No group organizer"}
                         </div>
                         {joinButton}
                         {organizerButtons}
