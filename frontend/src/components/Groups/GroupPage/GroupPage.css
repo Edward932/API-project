@@ -3,21 +3,29 @@
 }
 
 #group-display {
-    display: flex;
+    height: 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#group-display div {
+    max-height: 400px;
 }
 
 .group-img-div-large {
-    width: 60%;
-    height: 400px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-between;
     margin-right: 20px;
 }
 
 #group-preview-img {
+    max-width: 95%;
     height: auto;
-    width: 100%;
+    max-height: 95%;
+    align-self: center;
 }
 
 #group-info {
@@ -27,17 +35,19 @@
 }
 
 #join-group {
-    background-color: red;
+    background-color: darkred;
     color: white;
     box-shadow: 2px 2px black;
     height: 50px;
     font-size: 20px;
+    width: 250px;
+    cursor: pointer;
 }
 
 #organizer-buttons {
     display: flex;
-    flex-direction: column;
-    row-gap: 5px;
+    flex-direction: row;
+    column-gap: 10px;
 }
 
 #organizer-buttons button{
@@ -46,6 +56,8 @@
     box-shadow: 2px 2px black;
     height: 30px;
     font-size: 15px;
+    width: 150px;
+    cursor: pointer;
 }
 
 .group-event-img {
@@ -115,4 +127,28 @@
     display: flex;
     align-items: center;
     column-gap: 5px;
+}
+
+#group-name {
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.num-private-group {
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+    margin-top: 0;
+}
+
+#group-info-smaller {
+    color: grey
+}
+
+#group-location {
+    margin-bottom: 0;
+}
+
+#group-organizer {
+    margin-top: 0;
 }

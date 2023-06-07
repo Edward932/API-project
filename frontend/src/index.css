@@ -4,3 +4,7 @@
     overflow:hidden;
     font-family: "Gill Sans", sans-serif;
 }
+
+.user-info{
+    z-index: 100;
+}
