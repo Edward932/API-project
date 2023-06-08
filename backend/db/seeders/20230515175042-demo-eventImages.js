@@ -27,7 +27,7 @@ const seed = [
     ]
   },
   {
-    event: 'Figure out how to defaut chatGPT',
+    event: 'Figure out how to defeat chatGPT',
     imgs: [
       {
         url: 'https://cdn.pixabay.com/photo/2022/08/30/08/04/brain-7420599_1280.png',

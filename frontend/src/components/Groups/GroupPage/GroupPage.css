@@ -174,3 +174,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+#back-to-groups {
+    color: rgb(0 121 138);
+}

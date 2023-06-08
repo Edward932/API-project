@@ -55,7 +55,7 @@ export default function GroupPage() {
             <div id="group-page">
                 <div id="group-display">
                     <div className="group-img-div-large">
-                        <Link to ="/groups">{"< Groups"}</Link>
+                        <Link id="back-to-groups" to ="/groups">{"< Groups"}</Link>
                         {previewImage ? <img src={previewUrl} id="group-preview-img" alt="preview img"/> : <p id="group-preview-img">No preview image available</p>}
                     </div>
                     <div id="group-info">

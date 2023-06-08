@@ -123,3 +123,25 @@
     margin-top: 3px;
     margin-bottom: 20px;
 }
+
+#upper-event-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+#upper-event-div h1{
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 30px;
+}
+
+#host-name-event {
+    color: grey;
+    margin-top: 7px;
+}
+
+#back-to-events {
+    color: rgb(0 121 138);
+}

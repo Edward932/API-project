@@ -80,9 +80,11 @@ export default function EventPage() {
     if(event && +eventId === event?.id) {
         eventPage = (
             <div className="event-page-div">
-                <Link to="/events">{'< Events'}</Link>
-                <h1>{event.name}</h1>
-                <p>{group.Organizer?.firstName ? `Hosted by ${group.Organizer?.firstName} ${group?.Organizer?.lastName}` : 'No host registered for group'}</p>
+                <div id="upper-event-div">
+                    <Link id="back-to-events" to="/events">{'< Events'}</Link>
+                    <h1>{event.name}</h1>
+                    <p id="host-name-event">{group.Organizer?.firstName ? `Hosted by ${group.Organizer?.firstName} ${group?.Organizer?.lastName}` : 'No host registered for group'}</p>
+                </div>
                 <div id="event-main-div">
                     {previewImage ? <img src={previewUrl} id="event-preview-img" alt="preview"/> : <p id="event-preview-img">No preview image available</p>}
                     <div>

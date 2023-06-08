@@ -38,7 +38,7 @@ const seed = [
     group: "Defeat chatGPT",
     venue: "123 app academy Lane",
     event: {
-      name: "Figure out how to defaut chatGPT",
+      name: "Figure out how to defeat chatGPT",
       type: "In person",
       capacity: 10,
       price: 0,
