@@ -9,40 +9,40 @@ const { Group, Venue, Event } = require('../models');
 
 const seed = [
   {
-    group: "Evening Tennis on the Water",
+    group: "App Academy",
     venue: "123 Disney Lane",
     event: {
-      name: "Tennis Group First Meet and Greet",
+      name: "Graduation - February Cohort",
       type: "Online",
-      capacity: 10,
+      capacity: 40,
       price: 18.50,
-      description: "The first meet and greet for our group! Come say hello!",
-      startDate: "2023-11-19 20:00:00",
-      endDate: "2023-11-19 22:00:00",
+      description: "We made it !",
+      startDate: "2023-8-1 20:00:00",
+      endDate: "2023-8-1 22:00:00",
     }
   },
   {
-    group: "Evening Tennis on the Water",
+    group: "Leetcode",
     venue: "123 Disney Lane",
     event: {
-      name: "new Event",
-      type: "In person",
-      capacity: 10,
-      price: 18.50,
-      description: "The first meet and greet for our group! Come say hello!",
-      startDate: "2023-11-19 20:00:00",
-      endDate: "2023-11-19 22:00:00",
+      name: "Weekly contest",
+      type: "Online",
+      capacity: 1000,
+      price: 0,
+      description: "Weekly coding contest. First prize is an Apple HomePod mini!!!",
+      startDate: "2023-6-19 20:00:00",
+      endDate: "2023-6-19 22:00:00",
     }
   },
   {
-    group: "Fake group num 2",
+    group: "Defeat chatGPT",
     venue: "123 app academy Lane",
     event: {
-      name: "new Event 2",
+      name: "Figure out how to defaut chatGPT",
       type: "In person",
       capacity: 10,
-      price: 18.50,
-      description: "The first meet and greet for our group! Come say hello!",
+      price: 0,
+      description: "We will make a plan to defeat chatGPT.",
       startDate: "2024-11-19 20:00:00",
       endDate: "2024-11-19 22:00:00",
     }

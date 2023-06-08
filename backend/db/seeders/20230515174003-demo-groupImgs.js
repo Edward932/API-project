@@ -9,32 +9,38 @@ const { Group } = require('../models');
 
 const seed = [
   {
-    group: 'Fake group num 2',
+    group: 'App Academy',
     imgs: [
       {
-        url: 'https://fake.url.com',
-        preview: false
-      },
-      {
-        url: 'https://fake2.url.com',
+        url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Appacademylogo.png/175px-Appacademylogo.png',
         preview: true
       }
     ]
   },
   {
-    group: 'Evening Tennis on the Water',
+    group: 'Leetcode',
     imgs: [
       {
-        url: 'https://fake4.url.com',
+        url: 'https://leetcode.com/static/images/LeetCode_Sharing.png',
         preview: true
-      },
+      }
+    ]
+  },
+  {
+    group: 'MDN',
+    imgs: [
       {
-        url: 'https://fake3.url.com',
-        preview: false
-      },
+        url: 'https://download.logo.wine/logo/MDN_Web_Docs/MDN_Web_Docs-Logo.wine.png',
+        preview: true
+      }
+    ]
+  },
+  {
+    group: 'Defeat chatGPT',
+    imgs: [
       {
-        url: 'https://fake5.url.com',
-        preview: false
+        url: 'https://www.guidingtech.com/wp-content/uploads/ChatGPT-error.png',
+        preview: true
       }
     ]
   },

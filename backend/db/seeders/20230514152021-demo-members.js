@@ -9,17 +9,17 @@ const { Group, User, Member } = require('../models');
 
 const seed = [
   {
-    group: "Evening Tennis on the Water",
+    group: "App Academy",
     users: [
       'Demo-lition',
-      'FakeUser1'
+      'John-smith'
     ]
   },
   {
-    group:  "Fake group num 2",
+    group:  "Leetcode",
     users: [
       'FakeUser2',
-      'FakeUser1'
+      'John-smith'
     ]
   }
 ]

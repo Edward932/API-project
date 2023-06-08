@@ -12,16 +12,16 @@ const seed = [
     user: 'Demo-lition',
     groups: [
       {
-        name: "Evening Tennis on the Water",
-        about: "Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.",
-        type: "In person",
+        name: "App Academy",
+        about: "Change your career, change your life. Our software engineering bootcamps are designed to help people with little to no coding experience become good at computer and make lots of money.",
+        type: "Online",
         private: true,
-        city: "New York",
-        state: "NY",
+        city: "San Francisco",
+        state: "CA",
       },
       {
-        name: "Fake group",
-        about: "Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.",
+        name: "Leetcode",
+        about: "LeetCode is the best platform to help you enhance your skills, expand your knowledge and prepare for technical interviews.",
         type: "Online",
         private: false,
         city: "Raleigh",
@@ -30,15 +30,23 @@ const seed = [
     ]
   },
   {
-    user: null,
+    user: "John-smith",
     groups: [
       {
-        name: "Fake group num 2",
-        about: "Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.",
+        name: "MDN",
+        about: "The MDN Web Docs site provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and progressive web apps.",
         type: "Online",
         private: false,
-        city: "Raleigh",
-        state: "NC",
+        city: "New York",
+        state: "NY",
+      },
+      {
+        name: "Defeat chatGPT",
+        about: "Instead of learning to use AI to help us code we will team up to defeat chatGPT so that it does not take our jobs.",
+        type: "Online",
+        private: false,
+        city: "Denver",
+        state: "CO"
       }
     ]
   }
