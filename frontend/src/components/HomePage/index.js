@@ -30,7 +30,7 @@ export default function HomePage() {
                     <div id="bottom-links">
                         <div className='link-cards'>
                             <img className="sub-imgs" src="https://secure.meetupstatic.com/next/images/shared/handsUp.svg?w=256" alt="carton computer" />
-                            <Link className="link-homepage" to="/groups">See all goups</Link>
+                            <Link className="link-homepage" to="/groups">See all groups</Link>
                             <p>Do what you love, meet others who love it, find your community. The rest is history!</p>
                         </div>
                         <div className='link-cards'>
