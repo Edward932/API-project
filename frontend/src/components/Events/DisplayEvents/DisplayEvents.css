@@ -81,7 +81,7 @@
     flex-direction: column;
     background-color: white;
     width: 700px;
-    border-top: 2px solid grey;
+    border-top: 2px solid #d3d3d3;
     padding-top: 5px
 }
 

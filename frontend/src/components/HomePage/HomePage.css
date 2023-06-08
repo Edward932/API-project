@@ -96,6 +96,11 @@
     font-size: 20px;
 }
 
+.link-homepage:hover {
+    text-decoration: underline;
+}
+
+
 #join-meetup {
     background-color: rgb(0 121 138);
     color: white;
