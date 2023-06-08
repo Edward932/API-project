@@ -4,8 +4,9 @@
 }
 
 #event-main-div {
-    display: flex;
-    border: 2px solid blue;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 400px;
     flex-direction: row;
     column-gap: 20px;
 }
@@ -24,8 +25,8 @@
 
 #event-start-end {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    column-gap: 10px;
 }
 
 #event-start-end p{
@@ -33,7 +34,6 @@
 }
 
 #event-group-display {
-    border: 2px solid orange;
     display: flex;
     align-items: center;
     column-gap: 20px;
@@ -46,8 +46,9 @@
 }
 
 #event-group-small {
-    height: 100px;
-    width: 100px;
+    max-width: 125px;
+    max-height: 125px;
+    object-fit: contain;
 }
 
 #delete-group-modal {
@@ -144,4 +145,79 @@
 
 #back-to-events {
     color: rgb(0 121 138);
+}
+
+#text-up-top-events {
+    color: grey;
+    font-size: 17px;
+}
+
+#image-div-event {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 400px;
+}
+
+#event-preview-img {
+    width: 95%;
+    height: 95%;
+    object-fit: contain;
+}
+
+#event-group-display h4 {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 4px;
+    margin-top: 0;
+}
+
+#event-group-display p {
+    color: grey;
+    font-size: 15px;
+    margin-top: 0;
+}
+
+#event-info {
+    color: grey;
+    font-size: 17px;
+}
+
+#event-right-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+#event-host-buttons {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+#event-host-buttons button{
+    background-color: darkgray;
+    color: white;
+    box-shadow: 2px 2px black;
+    height: 30px;
+    font-size: 15px;
+    width: 150px;
+    cursor: pointer;
+}
+
+#event-time-color {
+    color: rgb(0 121 138);
+}
+
+#event-description-title {
+    font-weight: 525;
+    font-size: 25px;
+}
+
+#event-group-title {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
 }
