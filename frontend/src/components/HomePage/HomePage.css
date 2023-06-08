@@ -27,8 +27,8 @@
 }
 
 #main-img {
-    width: auto;
     max-height: 250px;
+    max-width: 100%;
 }
 
 #main-img-div {
