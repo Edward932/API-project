@@ -98,7 +98,7 @@ export const createGroupThunk = (group, imgURL) => async dispatch => {
         dispatch(createGroup(group));
         return group;
     } else {
-        const error = res.json();
+        const error = await res.json();
         return error;
     }
 };
@@ -150,7 +150,7 @@ export const deleteGroupThunk = (groupId) => async dispatch => {
         dispatch(deleteGroup(groupId));
         return message;
     } else {
-        const error = res.json();
+        const error = await res.json();
         return error;
     }
 };
@@ -174,8 +174,8 @@ export const updateGroupThunk = (group, groupId, imgURL) => async dispatch => {
         dispatch(updateGroup(group));
         return group;
     } else {
-        const error = res.json();
-        console.log('ERRROEROE')
+        const error = await res.json();
+        console.log(error)
         return error;
     }
 };
