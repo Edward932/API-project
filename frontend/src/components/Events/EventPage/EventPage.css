@@ -7,6 +7,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: 400px;
+    padding-top: 20px;
     flex-direction: row;
     column-gap: 20px;
 }
@@ -14,6 +15,8 @@
 #event-preview-img {
     width: 400px;
     height: 300px;
+    background-color: white;
+    border-radius: 15px;
 }
 
 #event-time {
@@ -37,6 +40,10 @@
     display: flex;
     align-items: center;
     column-gap: 20px;
+    background-color: white;
+    width: 500px;
+    padding: 20px;
+    border-radius: 15px;
 }
 
 .event-money-type {
@@ -145,6 +152,7 @@
 
 #back-to-events {
     color: rgb(0 121 138);
+    text-decoration: none;
 }
 
 #text-up-top-events {
@@ -181,6 +189,12 @@
 #event-info {
     color: grey;
     font-size: 17px;
+    background-color: white;
+    padding: 10px 20px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    border-radius: 15px;
 }
 
 #event-right-div {
@@ -204,10 +218,15 @@
     font-size: 15px;
     width: 150px;
     cursor: pointer;
+    border: none;
+    border-radius: 10px;
 }
 
 #event-time-color {
     color: rgb(0 121 138);
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
 }
 
 #event-description-title {
@@ -220,4 +239,15 @@
     flex-direction: column;
     align-items: start;
     justify-content: start;
+}
+
+#background-wrapper-div {
+    background-color: lightgray;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 200px;
+    padding-left: 50px;
+    padding-right: 50px;
+    min-height: calc(100% - 200px);
 }

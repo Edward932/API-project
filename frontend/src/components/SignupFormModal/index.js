@@ -44,7 +44,6 @@ function SignupFormModal() {
   return (
     <div id="sign-up-form">
       <div id="title-logo-signup">
-        <img id="signup-logo" src="https://logosandtypes.com/wp-content/uploads/2020/07/meetup.svg" alt="meet-up logo"/>
         <h1>Sign Up</h1>
       </div>
       <form id="signup-form" onSubmit={handleSubmit}>

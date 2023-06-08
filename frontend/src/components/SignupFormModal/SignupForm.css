@@ -22,6 +22,12 @@
     flex-direction: column;
 }
 
+.signup-labels input {
+    height: 30px;
+    border-radius: 7px;
+    border: 1px lightgrey solid;
+}
+
 .signup-button {
     height: 40px;
     background-color: red;

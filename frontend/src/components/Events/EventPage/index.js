@@ -85,46 +85,48 @@ export default function EventPage() {
                     <h1>{event.name}</h1>
                     <p id="host-name-event">{group.Organizer?.firstName ? `Hosted by ${group.Organizer?.firstName} ${group?.Organizer?.lastName}` : 'No host registered for group'}</p>
                 </div>
-                <div id="event-main-div">
-                    <div id="image-div-event">
-                        {previewImage ? <img src={previewUrl} id="event-preview-img" alt="preview"/> : <p id="event-preview-img">No preview image available</p>}
-                    </div>
-                    <div id="event-right-div">
-                        <div id='event-group-display'>
-                            {groupPreviewUrl ? <img src={groupPreviewUrl} id="event-group-small" alt="group"/> : <p id="event-group-small">No preview image available</p>}
-                            <div id="event-group-title">
-                                <h4>{event.Group?.name}</h4>
-                                <p>{event.Group?.private ? 'Private' : 'Public'}</p>
-                            </div>
+                <div id="background-wrapper-div">
+                    <div id="event-main-div">
+                        <div id="image-div-event">
+                            {previewImage ? <img src={previewUrl} id="event-preview-img" alt="preview"/> : <p id="event-preview-img">No preview image available</p>}
                         </div>
-                        <div id="event-info">
-                            <div id="event-time">
-                               <i className="fa-regular fa-clock"></i>
-                                <div id='event-start-end'>
-                                    <div>
-                                        <p className="event-times">START </p>
-                                        <p className="event-times">END </p>
-                                    </div>
-                                    <div>
-                                        <p id="event-time-color">{date} <i className="fa-solid fa-circle"></i> {normalizedFor12}</p>
-                                        <p id="event-time-color">{dateEnd} <i className="fa-solid fa-circle"></i> {normalizedFor12End}</p>
-                                    </div>
+                        <div id="event-right-div">
+                            <div id='event-group-display'>
+                                {groupPreviewUrl ? <img src={groupPreviewUrl} id="event-group-small" alt="group"/> : <p id="event-group-small">No preview image available</p>}
+                                <div id="event-group-title">
+                                    <h4>{event.Group?.name}</h4>
+                                    <p>{event.Group?.private ? 'Private' : 'Public'}</p>
                                 </div>
                             </div>
-                            <div className="event-money-type">
-                                <i className="fa-solid fa-dollar-sign"></i>
-                                <p>{event.price > 0 ? `PRICE: $${event.price}` : 'FREE'}</p>
-                            </div>
-                            <div className="event-money-type">
-                                <i className="fa-solid fa-location-dot"></i>
-                                <p>{event.type}</p>
+                            <div id="event-info">
+                                <div id="event-time">
+                                <i className="fa-regular fa-clock"></i>
+                                    <div id='event-start-end'>
+                                        <div>
+                                            <p className="event-times">START </p>
+                                            <p className="event-times">END </p>
+                                        </div>
+                                        <div>
+                                            <p id="event-time-color">{date} <i className="fa-solid fa-circle"></i> {normalizedFor12}</p>
+                                            <p id="event-time-color">{dateEnd} <i className="fa-solid fa-circle"></i> {normalizedFor12End}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="event-money-type">
+                                    <i className="fa-solid fa-dollar-sign"></i>
+                                    <p>{event.price > 0 ? `PRICE: $${event.price}` : 'FREE'}</p>
+                                </div>
+                                <div className="event-money-type">
+                                    <i className="fa-solid fa-location-dot"></i>
+                                    <p>{event.type}</p>
+                                </div>
+                                {hostButtons}
                             </div>
                         </div>
-                        {hostButtons}
                     </div>
+                    <h3 id="event-description-title">Details</h3>
+                    <p>{event.description}</p>
                 </div>
-                <h3 id="event-description-title">Details</h3>
-                <p>{event.description}</p>
             </div>
         )
     };
