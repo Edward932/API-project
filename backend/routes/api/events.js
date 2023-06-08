@@ -61,7 +61,8 @@ router.get('/', async(req, res, next) => {
     const events = await Event.findAll({
         where,
         ...pagination,
-        attributes: ['id', 'name', 'description']
+        attributes: ['id', 'name', 'description'],
+        order: ['startDate']
     });
 
     for(let i = 0; i < events.length; i++) {
