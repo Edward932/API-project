@@ -63,3 +63,7 @@ ul {
     justify-content: space-between;
     padding-left: 0;
 }
+
+.log-sign-buttons button{
+    color: orange
+}
