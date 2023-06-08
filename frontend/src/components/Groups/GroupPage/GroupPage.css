@@ -42,19 +42,23 @@
 }
 
 #join-group {
-    background-color: darkred;
+    background-color: rgb(246 64 96);
     color: white;
     box-shadow: 2px 2px black;
     height: 50px;
     font-size: 20px;
     width: 250px;
     cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 5px;
 }
 
 #organizer-buttons {
     display: flex;
     flex-direction: row;
     column-gap: 10px;
+    margin-bottom: 4px;
 }
 
 #organizer-buttons button{
@@ -65,6 +69,8 @@
     font-size: 15px;
     width: 150px;
     cursor: pointer;
+    border: none;
+    border-radius: 10px;
 }
 
 .event-preview {
@@ -193,4 +199,5 @@
 
 #back-to-groups {
     color: rgb(0 121 138);
+    text-decoration: none;
 }
