@@ -27,7 +27,8 @@
 }
 
 #main-img {
-    width: 100%;
+    width: auto;
+    height: 250px;
 }
 
 #main-img-div {
@@ -42,6 +43,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
 }
 
 .sub-imgs {
@@ -78,7 +80,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 200px;
+    max-width: 220px;
 }
 
 .disabled-link {
@@ -134,4 +136,9 @@
     height: 100vh;
     top: 0;
     left: 0;
+}
+
+#lower-div img {
+    height: 100px;
+    width: auto;
 }

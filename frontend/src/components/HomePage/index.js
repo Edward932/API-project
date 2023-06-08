@@ -12,40 +12,40 @@ export default function HomePage() {
                 <div id="top-div">
                     <div id="title-div">
                         <h1>
-                            The people platform— <br/>
-                            Where interests<br/>
+                            The nerd platform— <br/>
+                            Where coding interests<br/>
                             become friendships
                         </h1>
-                        <p>Whatever your interest, from hiking and reading to networking and skill sharing, there are thousands of people who share it on Meetup. Events are happening every day—sign up to join the fun.</p>
+                        <p>Whatever your interest, from C++ and hardware to JS and even machine learning, there are thousands of people who share it on CodingMeetup. Events are happening every day—sign up to join the fun.</p>
                     </div>
                     <div id="main-img-div">
-                        <img id="main-img" src="https://secure.meetupstatic.com/next/images/shared/online_events.svg?w=640" alt="holding hands" />
+                        <img id="main-img" src="https://cdn.pixabay.com/photo/2015/05/13/03/09/robots-764951_1280.png" />
                     </div>
                 </div>
                 <div id="mid-div">
-                    <h3>How Meetup Works</h3>
+                    <h3>How CodingMeetup Works</h3>
                     <p>Meet new people who share your interests through online and in-person events. It’s free to create an account.</p>
                 </div>
                 <div id="lower-div">
                     <div id="bottom-links">
                         <div className='link-cards'>
-                            <img className="sub-imgs" src="https://secure.meetupstatic.com/next/images/shared/handsUp.svg?w=256" alt="carton computer" />
+                            <img className="sub-imgs" src="https://cdn.pixabay.com/photo/2018/09/26/09/18/pixel-cells-3704067_1280.png" />
                             <Link className="link-homepage" to="/groups">See all groups</Link>
                             <p>Do what you love, meet others who love it, find your community. The rest is history!</p>
                         </div>
                         <div className='link-cards'>
-                            <img className="sub-imgs" src="https://secure.meetupstatic.com/next/images/shared/ticket.svg?w=256" alt="carton computer" />
+                            <img className="sub-imgs" src="https://cdn.pixabay.com/photo/2018/09/17/09/47/pixel-3683373_1280.png" alt="carton computer" />
                             <Link className="link-homepage" to="/events">Find an event</Link>
-                            <p>Events are happening on just about any topic you can think of, from online gaming and photography to yoga and hiking.</p>
+                            <p>Events are happening on just about any topic you can think of, from coding to slightly different forms of coding.</p>
                         </div>
                         <div className='link-cards'>
-                            <img className="sub-imgs"src="https://secure.meetupstatic.com/next/images/shared/joinGroup.svg?w=256" alt="carton computer" />
+                            <img className="sub-imgs"src="https://cdn.pixabay.com/photo/2014/04/02/10/21/rocketship-303591_1280.png" />
                             <Link to="/groups/new" className={user ? "link-homepage" : "disabled-link"}>Start a new group</Link>
                             <p>You don’t have to be an expert to gather people together and explore shared interests.</p>
                         </div>
                     </div>
                     <div id="button-div-bottom">
-                        <button id='join-meetup'>Join Meetup</button>
+                        <button id='join-meetup'>Join CodingMeetup</button>
                     </div>
                 </div>
             </div>
