@@ -1,3 +1,40 @@
 .errors-group-create {
     color: red;
 }
+
+#update-group-title {
+    font-weight: 500;
+    font-size: 35px;
+}
+
+#update-group-form h3 {
+    font-weight: 600;
+    font-size: 22;
+    border-top: 2px solid lightgray;
+    padding-top: 5px;
+}
+
+#update-group-form input{
+    background-color: rgb(239, 243, 255);
+    width: 250px;
+}
+
+
+#update-group-form textarea {
+    background-color: rgb(239, 243, 255);
+    width: 250px;
+    height: 100px;
+}
+
+#update-group-form select {
+    background-color: rgb(239, 243, 255);
+}
+
+#update-group-button {
+    color: white;
+    background-color: darkred;
+    width: 200px;
+    height: 50px;
+    box-shadow: 2px 2px 2px darkgrey;
+    font-size: 18px;
+}
