@@ -30,7 +30,6 @@ function LoginFormModal() {
   return (
     <div id="login-form-div">
       <div id="title-logo-login">
-        <img id="logo-login" src="https://logosandtypes.com/wp-content/uploads/2020/07/meetup.svg" alt="meet-up logo"/>
         <h1>Log In</h1>
       </div>
       {errors.credential && (
