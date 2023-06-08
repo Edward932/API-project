@@ -63,7 +63,7 @@ export default function EventPage() {
     if(user && user.id === group.Organizer?.id) {
         console.log('eventID', eventId);
         hostButtons = (
-            <div>
+            <div id="event-host-buttons">
                 <button onClick={() => alert('feature coming soon')}>Update</button>
                 <OpenModalButton
                     buttonText="Delete"
@@ -80,25 +80,35 @@ export default function EventPage() {
     if(event && +eventId === event?.id) {
         eventPage = (
             <div className="event-page-div">
-                <Link to="/events">{'< Events'}</Link>
-                <h1>{event.name}</h1>
-                <p>{group.Organizer?.firstName ? `Hosted by ${group.Organizer?.firstName} ${group?.Organizer?.lastName}` : 'No host registered for group'}</p>
+                <div id="upper-event-div">
+                    <Link id="back-to-events" to="/events">{'< Events'}</Link>
+                    <h1>{event.name}</h1>
+                    <p id="host-name-event">{group.Organizer?.firstName ? `Hosted by ${group.Organizer?.firstName} ${group?.Organizer?.lastName}` : 'No host registered for group'}</p>
+                </div>
                 <div id="event-main-div">
-                    {previewImage ? <img src={previewUrl} id="event-preview-img" alt="preview"/> : <p id="event-preview-img">No preview image available</p>}
-                    <div>
+                    <div id="image-div-event">
+                        {previewImage ? <img src={previewUrl} id="event-preview-img" alt="preview"/> : <p id="event-preview-img">No preview image available</p>}
+                    </div>
+                    <div id="event-right-div">
                         <div id='event-group-display'>
                             {groupPreviewUrl ? <img src={groupPreviewUrl} id="event-group-small" alt="group"/> : <p id="event-group-small">No preview image available</p>}
-                            <div>
+                            <div id="event-group-title">
                                 <h4>{event.Group?.name}</h4>
                                 <p>{event.Group?.private ? 'Private' : 'Public'}</p>
                             </div>
                         </div>
-                        <div>
+                        <div id="event-info">
                             <div id="event-time">
                                <i className="fa-regular fa-clock"></i>
                                 <div id='event-start-end'>
-                                    <p className="event-times">START: {date} <i className="fa-solid fa-circle"></i> {normalizedFor12}</p>
-                                    <p className="event-times">END:  {dateEnd} <i className="fa-solid fa-circle"></i> {normalizedFor12End}</p>
+                                    <div>
+                                        <p className="event-times">START </p>
+                                        <p className="event-times">END </p>
+                                    </div>
+                                    <div>
+                                        <p id="event-time-color">{date} <i className="fa-solid fa-circle"></i> {normalizedFor12}</p>
+                                        <p id="event-time-color">{dateEnd} <i className="fa-solid fa-circle"></i> {normalizedFor12End}</p>
+                                    </div>
                                 </div>
                             </div>
                             <div className="event-money-type">
@@ -113,7 +123,7 @@ export default function EventPage() {
                         {hostButtons}
                     </div>
                 </div>
-                <h3>Details</h3>
+                <h3 id="event-description-title">Details</h3>
                 <p>{event.description}</p>
             </div>
         )

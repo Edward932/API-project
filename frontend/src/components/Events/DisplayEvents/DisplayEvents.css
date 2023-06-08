@@ -98,3 +98,19 @@
     margin-top: 5px;
     margin-bottom: 0;
 }
+
+.event-image-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    height: 200px;
+    width: 300px;
+}
+
+.event-desctiption-short {
+    -webkit-line-clamp: 5;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

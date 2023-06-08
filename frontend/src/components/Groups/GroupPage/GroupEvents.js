@@ -46,7 +46,9 @@ export default function GroupEvents({ groupId }) {
                     return (
                         <Link to={`/events/${event.id}`} key={event.id} className="group-event-link">
                             <div className="upper-event-card">
-                                <img src={event.previewImage} alt="event" className="group-event-img"/>
+                                <div className="event-preview">
+                                    <img src={event.previewImage} alt="event" className="group-event-img"/>
+                                </div>
                                 <div>
                                     <p className="group-event-time">{date} <i className="fa-solid fa-circle"></i> {normalizedFor12}</p>
                                     <h3 className="event-group-title">{event.name}</h3>

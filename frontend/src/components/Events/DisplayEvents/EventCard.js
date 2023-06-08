@@ -30,7 +30,7 @@ export default function GroupCard({ event }) {
                     <p className="event-location">{event.venue && `${event.venue.city}, ${event.venue.state}`}</p>
                 </div>
             </div>
-            <p>{event.description}</p>
+            <p className="event-desctiption-short">{event.description}</p>
         </Link>
     )
 }
