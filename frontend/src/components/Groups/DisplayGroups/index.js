@@ -16,7 +16,7 @@ export default function DisplayGroups() {
 
     return (
         <div>
-            <p id='groups-in-meetup'>Groups in Meetup</p>
+            <p id='groups-in-meetup'>Groups in CodingMeetup</p>
             {groupsArr.map(group => (
                 <GroupCard group={group} key={group.id}/>
             ))}

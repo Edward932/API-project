@@ -10,7 +10,7 @@ function Navigation({ isLoaded }){
     <div id="nav-div">
       <ul id="nav-bar">
         <li>
-          <NavLink exact to="/"><img id="home-button" src="https://www.meetup.com/mu_static/en-US/logo--script.257d0bb1.svg" alt="meetup-logo"/></NavLink>
+          <NavLink className="nav-link-home" exact to="/"><h2 id="nav-bar-home-link">CodingMeetup</h2></NavLink>
         </li>
         {isLoaded && (
           <li>

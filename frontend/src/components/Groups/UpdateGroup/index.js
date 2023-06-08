@@ -53,7 +53,6 @@ export default function UpdateGroup() {
         if(privateBoolean === '') errors.privateBoolean = "private or public is required";
         if(!type) errors.type = "Type is required";
         if(!imgURL) errors.imgURL = "Img URL is required";
-        console.log(imgURL)
         if(!imgURL.endsWith('.png') && !imgURL.endsWith('.jpg') && !imgURL.endsWith('.jpeg')) errors.imgURL = "Image URL must end in .png, .jpg or .jpeg";
 
         if(Object.values(errors).length) {
@@ -75,11 +74,11 @@ export default function UpdateGroup() {
         let group;
         try{
             group = await dispatch(updateGroupThunk(payload, groupId, imgURL));
-
+            console.log(group)
             history.push(`/groups/${group.id}`)
         } catch(e) {
-            setValidationErrors(e);
-            console.log(e)
+            const errors = await e.json()
+            setValidationErrors(errors.errors);
         }
     }
 
@@ -97,8 +96,8 @@ export default function UpdateGroup() {
 
     return (
         <div>
-            <h1>Update your Group</h1>
-            <form onSubmit={handleSubmit}>
+            <h1 id="update-group-title">Update your Group</h1>
+            <form id="update-group-form" onSubmit={handleSubmit}>
                 <label>
                     <h3>Set your group's location.</h3>
                     <p>Meetup groups meet locally, in person and online. We'll connect you with people in your area.</p>
@@ -227,7 +226,7 @@ export default function UpdateGroup() {
                     />
                     <p className='errors-group-create'>{validationErors.imgURL}</p>
                 </label>
-                <button type="submit">Update group</button>
+                <button id="update-group-button" type="submit">Update group</button>
             </form>
         </div>
     )

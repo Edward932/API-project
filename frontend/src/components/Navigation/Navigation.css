@@ -40,3 +40,26 @@ ul {
     display: flex;
     align-items: center;
 }
+
+#nav-bar-home-link {
+    color: rgb(246 64 96);
+    text-decoration: none;
+    margin-left: 0;
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.nav-link-home {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+}
+
+#nav-bar {
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+    justify-content: space-between;
+    padding-left: 0;
+}

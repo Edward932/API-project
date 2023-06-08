@@ -18,7 +18,7 @@ export default function DisplayEvents() {
 
     return (
         <div>
-            <p>Events in Meetup</p>
+            <p>Events in CodingMeetup</p>
             {eventsArr.map(event => (
                 <EventCard event={event} key={event.id}/>
             ))}

@@ -9,7 +9,7 @@ const { Group, Venue } = require('../models');
 
 const seed = [
   {
-    group: 'Evening Tennis on the Water',
+    group: 'App Academy',
     venues: [
       {
         "address": "123 Disney Lane",
@@ -28,7 +28,7 @@ const seed = [
     ]
   },
   {
-    group: "Fake group num 2",
+    group: "MDN",
     venues: [
       {
         "address": "123 app academy Lane",

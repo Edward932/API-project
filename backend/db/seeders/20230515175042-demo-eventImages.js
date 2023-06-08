@@ -9,32 +9,29 @@ const { Event } = require('../models');
 
 const seed = [
   {
-    event: 'Tennis Group First Meet and Greet',
+    event: 'Graduation - February Cohort',
     imgs: [
       {
-        url: 'https://fake.url.com',
-        preview: false
-      },
-      {
-        url: 'https://fake2.url.com',
+        url: 'https://cdn.pixabay.com/photo/2017/06/22/02/16/computer-icon-2429310_1280.png',
         preview: true
       }
     ]
   },
   {
-    event: 'new Event 2',
+    event: 'Weekly contest',
     imgs: [
       {
-        url: 'https://fake4.url.com',
+        url: 'https://assets.leetcode.com/users/images/4670048d-f8c8-4558-b790-39af34744d5e_1652094058.5072029.png',
         preview: true
-      },
+      }
+    ]
+  },
+  {
+    event: 'Figure out how to defaut chatGPT',
+    imgs: [
       {
-        url: 'https://fake3.url.com',
-        preview: false
-      },
-      {
-        url: 'https://fake5.url.com',
-        preview: false
+        url: 'https://cdn.pixabay.com/photo/2022/08/30/08/04/brain-7420599_1280.png',
+        preview: true
       }
     ]
   },
