@@ -46,8 +46,26 @@ function ProfileButton({ user }) {
     <div id="nav-bar-outer">
       <div id="profile-inner">
         {user && <Link to="/groups/new" className="new-groups-link">Start a new group</Link>}
-        <i onClick={openMenu} class="fa-solid fa-circle-user"></i>
+        {user && <i onClick={openMenu} class="fa-solid fa-circle-user"></i>}
       </div>
+      {!user && (<div id="log-sign-div">
+            <li id="log-in-button">
+              <OpenModalButton
+                buttonText="Log In"
+                onButtonClick={closeMenu}
+                modalComponent={<LoginFormModal />}
+              />
+            </li>
+            <li id="sign-in-button">
+              <OpenModalButton
+                buttonText="Sign Up"
+                onButtonClick={closeMenu}
+                modalComponent={<SignupFormModal />}
+              />
+            </li>
+          </div>
+      )}
+
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <div className="user-info">
@@ -59,22 +77,7 @@ function ProfileButton({ user }) {
             </li>
           </div>
         ) : (
-          <div>
-            <li className="log-sign-buttons">
-              <OpenModalButton
-                buttonText="Log In"
-                onButtonClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-            </li>
-            <li className="log-sign-buttons">
-              <OpenModalButton
-                buttonText="Sign Up"
-                onButtonClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
-            </li>
-          </div>
+          null
         )}
       </ul>
     </div>
