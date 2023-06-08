@@ -35,6 +35,7 @@ export default function CreateGroup() {
             setValidationErrors(errors);
             return;
         }
+        console.log(name, 'name');
 
         const payload = {
             name,
@@ -51,8 +52,9 @@ export default function CreateGroup() {
 
             history.push(`/groups/${group.id}`)
         } catch(e) {
-            setValidationErrors(e);
-            console.log(validationErors)
+            const errors = await e.json();
+            setValidationErrors(errors.errors);
+            console.log('in here', validationErors)
         }
     }
 

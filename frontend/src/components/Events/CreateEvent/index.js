@@ -116,6 +116,7 @@ export default function CreateEvent() {
                         type="number"
                         min={0}
                         value={price}
+                        step={0.01}
                         onChange={(e) => setPrice(e.target.value)}
                     />
                     <p className="validation-errors">{validationErors.price}</p>

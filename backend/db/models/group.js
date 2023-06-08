@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         len: {
           args: [1, 60],
-          msg: 'Name must be 60 charecters or less'
+          msg: 'Name must be between 1 and 60 charecters'
         }
       }
     },
