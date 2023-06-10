@@ -11,7 +11,7 @@ export default function GroupCard({ event }) {
         timeArr[0] -= 12;
         timeArr[1] += ' PM'
     } else {
-        timeArr[0] += ' AM'
+        timeArr[1] += ' AM'
     }
     timeArr.pop();
     const normalizedFor12 = timeArr.join(':');
