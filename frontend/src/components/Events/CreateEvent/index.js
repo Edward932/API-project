@@ -81,7 +81,7 @@ export default function CreateEvent() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Event Name"
-                        maxLength={250}
+                        maxLength={100}
                     />
                     <p className="validation-errors">{validationErors.name}</p>
                 </label>
