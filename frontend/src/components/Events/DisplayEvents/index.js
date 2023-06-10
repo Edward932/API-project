@@ -9,8 +9,7 @@ export default function DisplayEvents() {
     const eventsObj = useSelector(state => state.events.allEvents);
     const eventsArr = Object.values(eventsObj ?? {});
 
-    // change this since it is given as an array in order to begin with.
-    eventsArr.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+    eventsArr.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
 
     useEffect(() => {
         dispatch(getEventsThunk())
