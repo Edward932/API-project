@@ -69,6 +69,8 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <div className="user-info">
+            <Link className="profile-links" to="/groups">View all groups</Link>
+            <Link className="profile-links" to="/events">View all events</Link>
             <li>Hello: {user.firstName} {user.lastName}</li>
             <li>{user.username}</li>
             <li>{user.email}</li>

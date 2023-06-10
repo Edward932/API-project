@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './DisplayEvents.css'
 
 export default function GroupCard({ event }) {
-    //console.log('event in GroupCard componenent', event)
+
     const time = new Date(event.startDate);
     const date = time.toDateString();
     const timeOfDay = time.toTimeString().split(' ')[0];
@@ -16,8 +16,6 @@ export default function GroupCard({ event }) {
     timeArr.pop();
     const normalizedFor12 = timeArr.join(':');
 
-
-    console.log(event)
     return (
         <Link to={`/events/${event.id}`} key={event.id} className="event-link">
             <div className="upper-event-card">

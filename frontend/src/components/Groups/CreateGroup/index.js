@@ -35,7 +35,7 @@ export default function CreateGroup() {
             setValidationErrors(errors);
             return;
         }
-        console.log(name, 'name');
+
 
         const payload = {
             name,
@@ -54,7 +54,6 @@ export default function CreateGroup() {
         } catch(e) {
             const errors = await e.json();
             setValidationErrors(errors.errors);
-            console.log('in here', validationErors)
         }
     }
 

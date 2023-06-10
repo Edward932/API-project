@@ -16,7 +16,7 @@ export default function EventPage() {
     const user = useSelector(state => state.session.user);
 
 
-    const [showMenu, setShowMenu] = useState(false);
+    const [, setShowMenu] = useState(false);
     const closeMenu = () => setShowMenu(false);
 
     const previewImage = event.EventImages?.find(image => image.preview === true);
@@ -61,7 +61,7 @@ export default function EventPage() {
 
     let hostButtons = null;
     if(user && user.id === group.Organizer?.id) {
-        console.log('eventID', eventId);
+
         hostButtons = (
             <div id="event-host-buttons">
                 <button onClick={() => alert('feature coming soon')}>Update</button>

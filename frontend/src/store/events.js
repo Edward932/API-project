@@ -5,7 +5,6 @@ const GET_EVENTS = 'events/getEvents';
 const GET_EVENT_BY_ID = 'events/getEventById';
 const DELETE_EVENT = 'events/delteEvent';
 const CREATE_EVENT = 'events/createEvent';
-const CREATE_IMAGE = 'events/createImage'
 
 const getEventsByGroup = events => {
     return {
@@ -42,9 +41,6 @@ const createEvent = (event) => {
     }
 };
 
-// const createImage = (image) => {
-
-// }
 
 export const getEventsByGroupThunk = groupId => async dispatch => {
     const res = await fetch(`/api/groups/${groupId}/events`);
@@ -86,7 +82,7 @@ export const getEventByIdThunk = eventId => async dispatch => {
 };
 
 export const deleteEventThunk = eventId => async dispatch => {
-    //console.log(eventId);
+
     const res = await csrfFetch(`/api/events/${eventId}`, {
         method: 'DELETE'
     });
@@ -131,7 +127,7 @@ export const createEventThunk = (event, groupId, imageURL) => async dispatch => 
     if(res.ok) {
         const event = await res.json();
 
-        const img = await dispatch(createImageThunk(event.id, imageURL));
+        await dispatch(createImageThunk(event.id, imageURL));
         dispatch(createEvent(event));
         return event;
     } else {

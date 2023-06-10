@@ -25,7 +25,6 @@ export default function UpdateGroup() {
     useEffect(() => {
         (async () => {
             const group = await dispatch(getGroupByIdThunk(groupId));
-            //console.log('update grou', group)
 
             setCity(group.city);
             setState(group.state);
@@ -69,12 +68,10 @@ export default function UpdateGroup() {
             state
         }
 
-        //console.log(payload)
 
         let group;
         try{
             group = await dispatch(updateGroupThunk(payload, groupId, imgURL));
-            console.log(group)
             history.push(`/groups/${group.id}`)
         } catch(e) {
             const errors = await e.json()

@@ -15,9 +15,6 @@ export default function DisplayEvents() {
         dispatch(getEventsThunk())
     }, [dispatch]);
 
-
-    console.log(eventsArr);
-
     return (
         <div>
             <p id="text-up-top-events">Events in CodingMeetup</p>
