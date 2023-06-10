@@ -32,7 +32,7 @@ export default function EventPage() {
         timeArr[0] -= 12;
         timeArr[1] += ' PM'
     } else {
-        timeArr[0] += ' AM'
+        timeArr[1] += ' AM'
     }
     timeArr.pop();
     const normalizedFor12 = timeArr.join(':');
@@ -91,13 +91,13 @@ export default function EventPage() {
                             {previewImage ? <img src={previewUrl} id="event-preview-img" alt="preview"/> : <p id="event-preview-img">No preview image available</p>}
                         </div>
                         <div id="event-right-div">
-                            <div id='event-group-display'>
+                            <Link to={`/groups/${event.Group?.id}`} id='event-group-display'>
                                 {groupPreviewUrl ? <img src={groupPreviewUrl} id="event-group-small" alt="group"/> : <p id="event-group-small">No preview image available</p>}
                                 <div id="event-group-title">
                                     <h4>{event.Group?.name}</h4>
                                     <p>{event.Group?.private ? 'Private' : 'Public'}</p>
                                 </div>
-                            </div>
+                            </Link>
                             <div id="event-info">
                                 <div id="event-time">
                                 <i className="fa-regular fa-clock"></i>
