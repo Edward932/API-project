@@ -75,7 +75,7 @@ export default function CreateEvent() {
             <h1 id="event-form-title">Create a new event for {group?.name}</h1>
             <form onSubmit={handleSubmit}>
                 <label>
-                    <p>What is the namae of your event</p>
+                    <p>What is the name of your event</p>
                     <input
                         className="wide-label"
                         value={name}
@@ -127,6 +127,8 @@ export default function CreateEvent() {
                         type="datetime-local"
                         value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
+                        min="2023-01-01T00:00"
+                        max="2050-01-01T00:00"
                     />
                     <p className="validation-errors">{validationErors.startDate}</p>
                 </label>
@@ -136,6 +138,8 @@ export default function CreateEvent() {
                         type="datetime-local"
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
+                        min="2023-01-01T00:00"
+                        max="2050-01-01T00:00"
                     />
                     <p className="validation-errors">{validationErors.endDate}</p>
                 </label>
