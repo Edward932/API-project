@@ -295,7 +295,7 @@ router.post('/:groupId/events', requireAuth, isOrganizerOrCohost, async(req, res
     let event;
     try {
         // change to find by PK when you have a venueId
-        const venue = await Venue.findOne();
+        const venue = await Venue.findByPk(1);
 
         event = await Event.create({
             groupId: parseInt(req.params.groupId),

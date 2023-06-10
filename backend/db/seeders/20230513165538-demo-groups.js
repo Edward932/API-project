@@ -9,7 +9,7 @@ const { User, Group } = require('../models');
 
 const seed = [
   {
-    user: 'Demo-lition',
+    user: 'John-smith',
     groups: [
       {
         name: "App Academy",
@@ -30,7 +30,7 @@ const seed = [
     ]
   },
   {
-    user: "John-smith",
+    user: "Demo-lition",
     groups: [
       {
         name: "MDN",
