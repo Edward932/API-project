@@ -8,7 +8,6 @@ export default function DeleteEventModal({ eventId }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    console.log('eventId in modal', eventId)
     const handleDelete = async() => {
         const res = await dispatch(deleteEventThunk(eventId));
 

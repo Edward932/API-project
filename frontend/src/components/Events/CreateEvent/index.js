@@ -10,7 +10,6 @@ export default function CreateEvent() {
     const history = useHistory();
     const { groupId } = useParams();
     const group = useSelector(state => state.groups.singleGroup);
-    console.log(group)
 
 
     const [name, setName] = useState('');
@@ -64,7 +63,6 @@ export default function CreateEvent() {
         } catch(e) {
             const data = await e.json();
             setValidationErrors(data.errors);
-            console.log(data);
         }
     };
 
