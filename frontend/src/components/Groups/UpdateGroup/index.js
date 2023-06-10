@@ -102,6 +102,7 @@ export default function UpdateGroup() {
                         placeholder="City"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
+                        maxLength={100}
                     />
                     <p className='errors-group-create'>{validationErors.city}</p>
                     State: <select
@@ -186,6 +187,7 @@ export default function UpdateGroup() {
                         placeholder="Please write at least 50 characters"
                         value={about}
                         onChange={(e) => setAbout(e.target.value)}
+                        maxLength={2000}
                     />
                     <p className='errors-group-create'>{validationErors.about}</p>
                 </label>
@@ -220,6 +222,7 @@ export default function UpdateGroup() {
                         value={imgURL}
                         onChange={(e) => setImgURL(e.target.value)}
                         placeholder="image URL"
+                        maxLength={250}
                     />
                     <p className='errors-group-create'>{validationErors.imgURL}</p>
                 </label>

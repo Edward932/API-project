@@ -81,6 +81,7 @@ export default function CreateEvent() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Event Name"
+                        maxLength={250}
                     />
                     <p className="validation-errors">{validationErors.name}</p>
                 </label>
@@ -113,6 +114,7 @@ export default function CreateEvent() {
                     <input
                         type="number"
                         min={0}
+                        max={1000}
                         value={price}
                         step={0.01}
                         onChange={(e) => setPrice(e.target.value)}
@@ -144,6 +146,7 @@ export default function CreateEvent() {
                         placeholder="Image URL"
                         value={imgUrl}
                         onChange={(e) => setImgUrl(e.target.value)}
+                        maxLength={250}
                     />
                     <p className="validation-errors">{validationErors.imgUrl}</p>
                 </label>
@@ -153,6 +156,7 @@ export default function CreateEvent() {
                         placeholder="Please provide at least 30 charecters"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
+                        maxLength={2000}
                     />
                     <p className="validation-errors">{validationErors.description}</p>
                 </label>

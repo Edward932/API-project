@@ -52,7 +52,7 @@ function SignupFormModal() {
           <input
             type="text"
             value={email}
-            maxLength={256}
+            maxLength={250}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -98,6 +98,7 @@ function SignupFormModal() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            maxLength={50}
           />
         </label>
         {errors.password && <p className="errors">{errors.password}</p>}
@@ -108,6 +109,7 @@ function SignupFormModal() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            maxLength={50}
           />
         </label>
         {errors.confirmPassword && (
