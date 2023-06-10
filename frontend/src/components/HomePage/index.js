@@ -1,9 +1,31 @@
 import './HomePage.css'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import OpenModalButton from '../OpenModalButton';
+import SignupFormModal from '../SignupFormModal';
+import { useState, useEffect, useRef } from 'react';
 
 export default function HomePage() {
     const user = useSelector(state => state.session.user);
+
+    const [showMenu, setShowMenu] = useState(false);
+    const ulRef = useRef();
+
+    useEffect(() => {
+      if (!showMenu) return;
+
+      const closeMenu = (e) => {
+        if (!ulRef.current.contains(e.target)) {
+          setShowMenu(false);
+        }
+      };
+
+      document.addEventListener('click', closeMenu);
+
+      return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
+
+    const closeMenu = () => setShowMenu(false);
 
     return (
         <>
@@ -45,7 +67,11 @@ export default function HomePage() {
                         </div>
                     </div>
                     <div id="button-div-bottom">
-                        <button id='join-meetup'>Join CodingMeetup</button>
+                        <OpenModalButton
+                            buttonText="Join CodingMeetup"
+                            onButtonClick={closeMenu}
+                            modalComponent={<SignupFormModal />}
+                        />
                     </div>
                 </div>
             </div>
